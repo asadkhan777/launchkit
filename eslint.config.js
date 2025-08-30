@@ -1,8 +1,8 @@
-const js = require('@eslint/js');
-const typescript = require('@typescript-eslint/eslint-plugin');
-const typescriptParser = require('@typescript-eslint/parser');
+import js from '@eslint/js';
+import typescript from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
 
-module.exports = [
+export default [
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
@@ -11,6 +11,7 @@ module.exports = [
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        project: './tsconfig.json',
       },
       globals: {
         console: 'readonly',
@@ -33,6 +34,7 @@ module.exports = [
       '@typescript-eslint': typescript,
     },
     rules: {
+      ...typescript.configs.recommended.rules,
       '@typescript-eslint/no-explicit-any': 'warn',
       'no-console': ['warn', { allow: ['info', 'warn', 'error'] }],
       '@typescript-eslint/no-unused-vars': 'warn',
@@ -40,6 +42,13 @@ module.exports = [
     },
   },
   {
-    ignores: ['.next/**', 'node_modules/**', 'dist/**'],
+    ignores: [
+      '.next/**', 
+      'node_modules/**', 
+      'dist/**', 
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**'
+    ],
   },
 ];
