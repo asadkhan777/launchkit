@@ -5,7 +5,7 @@ import typescriptParser from '@typescript-eslint/parser';
 export default [
   js.configs.recommended,
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
@@ -39,6 +39,24 @@ export default [
       'no-console': ['warn', { allow: ['info', 'warn', 'error'] }],
       '@typescript-eslint/no-unused-vars': 'warn',
       'no-unused-vars': 'off', // Turn off base rule since we use TypeScript version
+      '@typescript-eslint/triple-slash-reference': 'off', // Allow Next.js triple slash references
+    },
+  },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        exports: 'readonly',
+      },
+    },
+    rules: {
+      'no-console': ['warn', { allow: ['info', 'warn', 'error'] }],
     },
   },
   {
