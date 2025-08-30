@@ -1,30 +1,30 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
+    "lib": ["ES2022", "DOM"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "strict": true,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/styles/*": [
-        "styles/*"
-      ],
-      "@/app/*": [
-        "app/*"
-      ]
+      "@/*": ["./apps/web/*"],
+      "@/lib/*": ["./apps/web/lib/*"],
+      "@/styles/*": ["./apps/web/styles/*"],
+      "@/app/*": ["./apps/web/app/*"],
+      "@launchkit/common": ["./packages/common/src/index.ts"],
+      "@launchkit/common/*": ["./packages/common/src/*"],
+      "@launchkit/ui": ["./packages/ui/src/index.ts"],
+      "@launchkit/ui/*": ["./packages/ui/src/*"],
+      "@launchkit/sdk": ["./packages/sdk/src/index.ts"],
+      "@launchkit/sdk/*": ["./packages/sdk/src/*"],
+      "@launchkit/tests": ["./packages/tests/src/index.ts"],
+      "@launchkit/tests/*": ["./packages/tests/src/*"]
     },
     "jsx": "preserve",
     "allowJs": true,
     "skipLibCheck": true,
-    "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -38,10 +38,15 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "apps/**/*",
+    "packages/**/*"
   ],
   "exclude": [
     "node_modules",
-    ".next"
+    ".next",
+    "**/node_modules",
+    "**/dist",
+    "**/build"
   ]
 }
