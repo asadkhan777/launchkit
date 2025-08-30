@@ -24,7 +24,7 @@ You are an autonomous **CLI coding agent** continuing to build the LaunchKit AI 
    - Ensure both the new function and its test pass when running `pnpm test`.
 
 5. **Run dev, lint, and tests**
-   - Run the development script (`pnpm dev` or `npm run dev`).  It may be a placeholder at this stage; ensure it executes without errors.
+   - Run the development script (`pnpm dev` or `npm run dev`).  It may still be a placeholder at this stage; ensure it is correctly implemented and executes without errors.
    - Run the lint script.  Fix any linting issues and commit with a message like `chore(v2): fix lint errors`.
    - Run the test suite.  All tests should pass.  If they fail, adjust the code or test until they succeed and commit the fixes.
 
@@ -40,4 +40,4 @@ You are an autonomous **CLI coding agent** continuing to build the LaunchKit AI 
 - Maintain the **Role–Task–Format** throughout this file.
 - Keep tasks ordered and specific; each task should lead to a tangible change in the repository.
 - Commit messages should follow **Conventional Commits** (e.g. `feat:`, `fix:`, `chore:`, `docs:`).
-- When implementing code under TDD, always write the test first, watch it fail, then implement the code to make the test pass.
+- When implementing code under TDD, always write the test first, watch it fail, then implement the code to make the test pass. d
