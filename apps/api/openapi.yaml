@@ -1,0 +1,493 @@
+openapi: 3.1.0
+info:
+  title: LaunchKit AI API
+  version: 1.0.0
+  description: |
+    LaunchKit AI API enables creators to automatically transform their existing content 
+    into monetizable online courses with integrated payment processing.
+    
+    ## Features
+    - Content extraction from Notion and other sources
+    - AI-powered course generation and structuring
+    - Stripe payment integration and webhook handling
+    - Course delivery and access management
+    
+    ## Base URL
+    - Development: `http://localhost:3001/api/v1`
+    - Production: `https://api.launchkit.ai/v1`
+  contact:
+    name: LaunchKit AI Support
+    url: https://launchkit.ai/support
+    email: support@launchkit.ai
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:3001/api/v1
+    description: Development server
+  - url: https://api.launchkit.ai/v1
+    description: Production server
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - email
+        - createdAt
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user
+          example: "clp123abc456def789"
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: "creator@example.com"
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user account was created
+          example: "2024-01-15T10:30:00Z"
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+          description: Courses created by this user
+
+    Course:
+      type: object
+      required:
+        - id
+        - slug
+        - title
+        - ownerId
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the course
+          example: "clp456def789ghi012"
+        slug:
+          type: string
+          description: URL-friendly unique identifier
+          example: "intro-to-react-hooks"
+        title:
+          type: string
+          description: Course title
+          example: "Introduction to React Hooks"
+        description:
+          type: string
+          nullable: true
+          description: Course description
+          example: "Learn modern React development with hooks"
+        ownerId:
+          type: string
+          description: ID of the user who owns this course
+          example: "clp123abc456def789"
+        createdAt:
+          type: string
+          format: date-time
+          description: When the course was created
+          example: "2024-01-15T14:22:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the course was last updated
+          example: "2024-01-16T09:15:00Z"
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lesson'
+          description: Lessons in this course
+
+    Lesson:
+      type: object
+      required:
+        - id
+        - courseId
+        - title
+        - order
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the lesson
+          example: "clp789ghi012jkl345"
+        courseId:
+          type: string
+          description: ID of the course this lesson belongs to
+          example: "clp456def789ghi012"
+        title:
+          type: string
+          description: Lesson title
+          example: "useState Hook Basics"
+        content:
+          type: string
+          nullable: true
+          description: Lesson content in markdown format
+          example: "# useState Hook\n\nThe useState hook allows you to..."
+        order:
+          type: integer
+          minimum: 0
+          default: 0
+          description: Display order of the lesson within the course
+          example: 1
+
+    Order:
+      type: object
+      required:
+        - id
+        - courseId
+        - buyerEmail
+        - amountCents
+        - createdAt
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the order
+          example: "clp012jkl345mno678"
+        courseId:
+          type: string
+          description: ID of the purchased course
+          example: "clp456def789ghi012"
+        buyerEmail:
+          type: string
+          format: email
+          description: Email address of the buyer
+          example: "buyer@example.com"
+        amountCents:
+          type: integer
+          minimum: 1
+          description: Purchase amount in cents
+          example: 4999
+        createdAt:
+          type: string
+          format: date-time
+          description: When the order was created
+          example: "2024-01-15T16:45:00Z"
+
+    ImportRequest:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the content to import
+          example: "https://notion.so/creator/my-course-content"
+        extractionOptions:
+          type: object
+          properties:
+            includeSubpages:
+              type: boolean
+              default: true
+              description: Whether to include content from subpages
+            maxDepth:
+              type: integer
+              minimum: 1
+              maximum: 5
+              default: 3
+              description: Maximum depth of subpages to extract
+
+    ImportResponse:
+      type: object
+      required:
+        - extractedText
+        - metadata
+      properties:
+        extractedText:
+          type: string
+          description: Extracted text content
+          example: "# Course Introduction\n\nThis course covers..."
+        metadata:
+          type: object
+          properties:
+            wordCount:
+              type: integer
+              example: 2500
+            pageCount:
+              type: integer
+              example: 12
+            lastModified:
+              type: string
+              format: date-time
+              example: "2024-01-14T12:00:00Z"
+
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+              description: Error code for programmatic handling
+              example: "VALIDATION_ERROR"
+            message:
+              type: string
+              description: Human-readable error message
+              example: "Invalid input data"
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    example: "email"
+                  message:
+                    type: string
+                    example: "Invalid email format"
+            requestId:
+              type: string
+              description: Unique request identifier for debugging
+              example: "req_1234567890"
+
+paths:
+  /import:
+    post:
+      summary: Import content from external source
+      description: Extract content from a provided URL for course generation
+      tags:
+        - Content Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportRequest'
+      responses:
+        '200':
+          description: Content successfully extracted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResponse'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Content extraction failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /generate:
+    post:
+      summary: Generate course from content
+      description: Use AI to generate course structure and lessons from extracted content
+      tags:
+        - Content Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+              properties:
+                content:
+                  type: string
+                  description: Extracted content to generate course from
+                options:
+                  type: object
+                  properties:
+                    lessonCount:
+                      type: integer
+                      minimum: 1
+                      maximum: 20
+                      default: 5
+                    difficulty:
+                      type: string
+                      enum: [beginner, intermediate, advanced]
+                      default: intermediate
+      responses:
+        '201':
+          description: Course generation started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  courseId:
+                    type: string
+                    example: "clp456def789ghi012"
+                  status:
+                    type: string
+                    example: "generating"
+
+  /courses:
+    get:
+      summary: List user's courses
+      description: Retrieve all courses created by the authenticated user
+      tags:
+        - Course Management
+      responses:
+        '200':
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+
+  /courses/{id}:
+    get:
+      summary: Get course details
+      description: Retrieve detailed information about a specific course
+      tags:
+        - Course Management
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Course ID
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /courses/{slug}/public:
+    get:
+      summary: Get public course information
+      description: Retrieve public course information for landing page display
+      tags:
+        - Public Access
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Course slug
+      responses:
+        '200':
+          description: Public course information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  lessonCount:
+                    type: integer
+                  price:
+                    type: integer
+                    description: Price in cents
+
+  /courses/{slug}/checkout:
+    post:
+      summary: Create checkout session
+      description: Create a Stripe checkout session for course purchase
+      tags:
+        - Payment
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Course slug
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - buyerEmail
+              properties:
+                buyerEmail:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Checkout session created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkoutUrl:
+                    type: string
+                    format: uri
+                    description: Stripe checkout URL
+
+  /orders:
+    get:
+      summary: List orders
+      description: Retrieve orders (admin only)
+      tags:
+        - Order Management
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+
+  /webhooks/stripe:
+    post:
+      summary: Stripe webhook handler
+      description: Handle Stripe payment events and webhook notifications
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Stripe webhook payload
+      responses:
+        '200':
+          description: Webhook processed successfully
+        '400':
+          description: Invalid webhook payload
+
+tags:
+  - name: Content Management
+    description: Content import and course generation operations
+  - name: Course Management
+    description: Course CRUD operations for creators
+  - name: Public Access
+    description: Public endpoints for course discovery and access
+  - name: Payment
+    description: Payment processing and checkout operations
+  - name: Order Management
+    description: Order tracking and management
+  - name: Webhooks
+    description: External service webhook handlers
