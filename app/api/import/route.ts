@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   try {
     const data = await extractFromUrl(parse.data.url)
     return NextResponse.json(data)
-  } catch {
-    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 })
+  } catch (err) {
+    return NextResponse.json({ error: 'Failed to fetch data due to: ' + err }, { status: 500 })
   }
 }
