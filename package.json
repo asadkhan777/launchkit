@@ -2,10 +2,7 @@
   "name": "launchkit-ai",
   "private": true,
   "version": "0.1.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "type": "module",
   "scripts": {
     "dev": "echo \"Define dev script in later versions\"",
     "test": "vitest run",
