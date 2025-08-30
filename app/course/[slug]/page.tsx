@@ -1,6 +1,5 @@
 
 import { prisma } from '@/lib/db'
-import { stripe } from '@/lib/stripe'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
