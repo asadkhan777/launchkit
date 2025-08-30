@@ -6,12 +6,18 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --build",
-    "lint": "eslint src --ext .ts",
-    "type-check": "tsc --noEmit"
+    "test": "vitest",
+    "lint": "eslint src --ext .ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fastify": "latest",
+    "pino": "latest",
+    "zod": "latest",
+    "@prisma/client": "*"
+  },
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "*"
   }
 }
