@@ -10,8 +10,7 @@
 
         // Simple placeholder generator; swap this function for your LLM call
         export function draftFromText(title: string, body: string): Draft {
-          const paras = body.split(/
-{2,}/).filter(Boolean)
+          const paras = body.split(/\n{2,}/).filter(Boolean)
           const picks = Array.from({ length: 5 }).map((_, i) => paras[i] ?? paras[0] ?? body)
           return {
             lessons: picks.map((p, i) => ({ title: `${title}: Day ${i + 1}`, content: p.slice(0, 1500) })),

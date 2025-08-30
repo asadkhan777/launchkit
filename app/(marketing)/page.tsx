@@ -2,7 +2,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -11,7 +10,6 @@ const ImportSchema = z.object({ url: z.string().url() })
 const GenerateSchema = z.object({ title: z.string().min(3), body: z.string().min(40) })
 
 export default function MarketingPage() {
-  const router = useRouter()
   const [importResult, setImportResult] = useState<{ title: string; text: string } | null>(null)
   const [draft, setDraft] = useState<any | null>(null)
 
