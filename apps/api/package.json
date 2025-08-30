@@ -1,0 +1,17 @@
+{
+  "name": "@launchkit-ai/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'API dev server placeholder'",
+    "build": "echo 'API build placeholder'",
+    "start": "echo 'API start placeholder'",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "typescript": "^5.5.4"
+  }
+}
