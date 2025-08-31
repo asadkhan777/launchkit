@@ -1,6 +1,15 @@
+// Initialize observability before any other imports
+import { startTelemetry, shutdownTelemetry } from './observability.js';
+import { initializeSentry, captureException, closeSentry } from './error-tracking.js';
+
+// Start telemetry first
+startTelemetry();
+initializeSentry();
+
 import fastify, { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { createCourse, listCourses, CourseCreateSchema, type CourseCreate } from '@launchkit-ai/sdk';
+import { createCourse, listCourses, CourseCreateSchema, type CourseCreate, getPrismaClient } from '@launchkit-ai/sdk';
 import { z } from 'zod';
+import { registerHealthChecks } from './health.js';
 
 // Query parameter schema for listing courses
 const ListCoursesQuerySchema = z.object({
@@ -20,9 +29,24 @@ export function createApp(): FastifyInstance {
     },
   });
 
-  // Health check endpoint
-  app.get('/healthz', async (request: FastifyRequest, reply: FastifyReply) => {
-    return { status: 'ok' };
+  // Register health check endpoints
+  registerHealthChecks(app, getPrismaClient());
+
+  // Global error handler with Sentry integration
+  app.setErrorHandler(async (error, request, reply) => {
+    // Capture error in Sentry
+    captureException(error, {
+      method: request.method,
+      url: request.url,
+      userAgent: request.headers['user-agent'],
+    });
+
+    app.log.error(error, 'Unhandled error in request');
+    
+    reply.code(500).send({
+      error: 'Internal server error',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong',
+    });
   });
 
   // POST /courses - Create a new course
@@ -80,9 +104,34 @@ export function createApp(): FastifyInstance {
   return app;
 }
 
+// Graceful shutdown handler
+async function gracefulShutdown(app: FastifyInstance): Promise<void> {
+  console.log('Shutting down gracefully...');
+  
+  try {
+    await app.close();
+    console.log('Fastify server closed');
+  } catch (error) {
+    console.error('Error closing Fastify server:', error);
+  }
+
+  try {
+    await shutdownTelemetry();
+    await closeSentry();
+  } catch (error) {
+    console.error('Error shutting down observability:', error);
+  }
+
+  process.exit(0);
+}
+
 // Start function for the server
 export async function start(port: number = parseInt(process.env.PORT || '4000')): Promise<FastifyInstance> {
   const app = createApp();
+  
+  // Handle graceful shutdown
+  process.on('SIGTERM', () => gracefulShutdown(app));
+  process.on('SIGINT', () => gracefulShutdown(app));
   
   try {
     await app.listen({ port, host: '0.0.0.0' });
@@ -90,6 +139,7 @@ export async function start(port: number = parseInt(process.env.PORT || '4000'))
     return app;
   } catch (error) {
     app.log.error(error, 'Error starting server');
+    await gracefulShutdown(app);
     process.exit(1);
   }
 }
