@@ -16,8 +16,7 @@ Before any code generation, ask: *"Does this change advance the North Star Goal?
 **Proven Results**: V7 observability (2 hours vs incremental approach), V8 testing (3x faster, 40/40 tests passing)
 
 ## **Velocity Unlock Principles**
-## **Velocity Unlock Principles**
-1. **Focused Execution Mode**: ✅ MANDATORY (see above) - Load architectural principles once per session, then execute implementation tasks without re-analysis paralysis.
+1. **Focused Execution Mode**: ✅ MANDATORY (see above) - Load architectural principles _once per session_, then execute implementation tasks without re-analysis paralysis.
 2. **Batch Context Processing**: Complete entire features in focused sessions rather than file-by-file context switching.
 3. **Phase-Appropriate Filtering**: Apply MVP-phase guidelines - defer complex architectural patterns, focus on quality code and comprehensive testing.
 4. **Parallel Implementation**: Use tool parallelization aggressively for independent changes and batch related operations.
