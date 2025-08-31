@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'LaunchKit AI',
+  title: 'LaunchKit.ai',
   description: 'AI-powered course creation platform',
 }
 

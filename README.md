@@ -1,51 +1,125 @@
-# LaunchKit AI V2 (Simplified)
+# LaunchKit.ai
 
 *Created on 2025-08-29*
 
-This repository is a simplified yet more functional version of LaunchKit AI. It uses a
-**single Next.js app** (version 15.5.2) with integrated API routes for import,
-content generation, checkout, and webhooks. It leverages Prisma for data and
-SQLite for local development (Postgres for production via env). The goal is to
-get you from idea to monetization quickly without a monorepo.
+LaunchKit.ai is an AI-powered course creation platform that helps you transform any content into engaging micro-courses. Built with a modern monorepo architecture using Next.js, TypeScript, and Prisma.
+
+## Overview
+
+This platform enables you to paste a URL (Notion, blog, etc.) and automatically extract content to generate comprehensive 5-day micro-course outlines, email sequences, and landing pages. Built for rapid iteration from idea to monetization.
+
+## Architecture
+
+### Monorepo Structure
+```
+apps/
+├── api/          # Fastify REST API server
+└── web/          # Next.js frontend application
+
+packages/
+├── sdk/          # Backend SDK with Prisma & database operations
+├── common/       # Shared utilities and types
+├── ui/           # React UI component library
+└── tests/        # Centralized testing utilities
+```
+
+### Technology Stack
+- **Frontend**: Next.js 15, React 18, TypeScript
+- **Backend**: Fastify REST API wrapping SDK functionality
+- **Database**: Prisma ORM with SQLite (dev) / PostgreSQL (prod)
+- **Testing**: Vitest with comprehensive integration tests
+- **Tooling**: Turborepo, ESLint, Prettier, Husky
 
 ## Features
 
-- Paste a URL (Notion/blog/etc.) and extract a title + text
-- Generate a 5-day micro-course outline, email sequence, and landing stub
-- Minimal marketing page with import & generate forms
-- Placeholder dashboard to list your courses
-- API routes for checkout (Stripe) and webhooks
-- Clear seam to plug in an LLM for better generation (see `lib/generator.ts`)
-- Prisma schema for users, courses, lessons, and orders
+- 🔗 **Content Import**: Paste URLs to extract and process content
+- 🤖 **AI Generation**: Create 5-day micro-course outlines and email sequences  
+- 📊 **Dashboard**: Manage and organize your courses
+- 💳 **Payments**: Stripe integration for monetization
+- 🧪 **Testing**: Comprehensive test coverage with database isolation
+- 📦 **Monorepo**: Scalable architecture with shared packages
 
 ## Quick Start
 
 1. **Install dependencies**
-
 ```bash
 pnpm install
-pnpm prisma generate
-pnpm prisma migrate dev --name init
 ```
 
-2. **Copy env**
+2. **Setup database**
+```bash
+pnpm prisma generate
+pnpm prisma db push
+```
 
+3. **Configure environment**
 ```bash
 cp .env.example .env
 # Fill in STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_ID
 ```
 
-3. **Run dev**
-
+4. **Run development servers**
 ```bash
+# Start all services
 pnpm dev
+
+# Or start individually
+pnpm --filter @launchkit-ai/web dev    # Frontend (port 3000)
+pnpm --filter @launchkit-ai/api dev    # API (port 8000)
 ```
 
-Visit http://localhost:3000. Paste a URL, generate a draft, and explore.
+5. **Run tests**
+```bash
+pnpm test                 # All packages
+pnpm test:watch          # Watch mode
+```
 
-## Publish Flow (Guide)
+## API Endpoints
 
-This starter covers import & generation. To publish a course and sell it:
+### Health Check
+- `GET /healthz` - Server health status
+
+### Courses
+- `POST /courses` - Create a new course
+- `GET /courses?ownerId={id}` - List courses by owner
+
+## Development Workflow
+
+### Building
+```bash
+pnpm build              # Build all packages
+pnpm --filter web build # Build specific package
+```
+
+### Testing
+```bash
+pnpm test               # Run all tests
+pnpm --filter api test  # Test specific package
+```
+
+### Linting
+```bash
+pnpm lint               # Lint all packages
+pnpm lint:fix          # Auto-fix linting issues
+```
+
+## Deployment
+
+The monorepo is configured for easy deployment:
+- **Web App**: Deploy Next.js app to Vercel/Netlify
+- **API**: Deploy Fastify server to Railway/Render
+- **Database**: PostgreSQL on Supabase/PlanetScale
+
+## Contributing
+
+1. Follow the established patterns in each package
+2. Add tests for new functionality
+3. Ensure all tests pass: `pnpm test`
+4. Follow commit conventions for changesets
+
+## License
+
+MIT License - see LICENSE file for details.
 
 1. Add a page that saves the draft into the database with a slug
 using a Server Action or API route.
