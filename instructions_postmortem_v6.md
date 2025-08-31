@@ -1,4 +1,4 @@
-# LaunchKit AI V6 Implementation Postmortem
+# LaunchKit.ai V6 Implementation Postmortem
 
 ## Date: August 31, 2025
 ## Version: V6 - REST API Implementation
