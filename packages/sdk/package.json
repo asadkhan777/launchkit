@@ -6,7 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --build",
-    "test": "vitest",
+    "test": "vitest run --config=vitest.config.ts",
+    "test:watch": "vitest --config=vitest.config.ts",
+    "test:setup": "echo 'Test setup handled by vitest config'",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {

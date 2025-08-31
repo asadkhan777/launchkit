@@ -1,17 +1,31 @@
 {
   "name": "@launchkit-ai/api",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "echo 'API dev server placeholder'",
-    "build": "echo 'API build placeholder'",
-    "start": "echo 'API start placeholder'",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc --build",
+    "start": "node dist/index.js",
+    "test": "vitest run --config=vitest.config.ts",
+    "test:watch": "vitest --config=vitest.config.ts",
+    "test:setup": "echo 'Test setup handled by vitest config'",
     "lint": "eslint src --ext .ts",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fastify": "latest",
+    "@launchkit-ai/sdk": "workspace:*",
+    "@prisma/client": "*",
+    "zod": "latest",
+    "pino": "latest",
+    "pino-pretty": "latest"
+  },
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "ts-node": "^10.9.2",
+    "vitest": "^2.0.5"
   }
 }

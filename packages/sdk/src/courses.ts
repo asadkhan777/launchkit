@@ -48,7 +48,7 @@ export async function createCourse(input: CourseCreate): Promise<Course> {
         ownerId: validatedInput.ownerId,
         slug,
         title: validatedInput.title,
-        description: validatedInput.description ?? null,
+        description: validatedInput.description ?? '',
         lessons: {
           create: validatedInput.lessons.map((lesson, index) => ({
             title: lesson.title,
