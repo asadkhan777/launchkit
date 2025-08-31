@@ -97,10 +97,40 @@ pnpm --filter web build # Build specific package
 ```
 
 ### Testing
+
+#### Comprehensive Test Suite
 ```bash
-pnpm test               # Run all tests
-pnpm --filter api test  # Test specific package
+# Run all tests across the entire monorepo
+pnpm test                    # All packages (unit + integration)
+
+# Component-specific testing
+pnpm test:api               # API integration & unit tests
+pnpm test:sdk               # SDK unit tests  
+pnpm test:web               # Web app tests (when available)
+pnpm test:ui                # UI component tests
+pnpm test:common            # Common utilities tests
+
+# Test category targeting
+pnpm test:unit              # All unit tests (SDK + API + UI + Common)
+pnpm test:integration       # Database & API integration tests
+pnpm test:e2e               # End-to-end browser tests (V16+)
+pnpm test:visual            # Visual regression tests (V16+)
+
+# Development & debugging
+pnpm test:watch             # Watch mode for active development
+pnpm test:coverage          # Generate coverage reports
+pnpm test:e2e:ui            # E2E tests with Playwright UI
+pnpm test:e2e:debug         # E2E tests in debug mode
+
+# Utilities
+pnpm test:clean             # Clean up test artifacts (temp DBs, snapshots)
 ```
+
+#### Test Architecture
+- **Unit Tests**: Business logic validation (Vitest)
+- **Integration Tests**: Database operations & API endpoints (Vitest + SQLite)
+- **E2E Tests**: Full system workflows (Playwright) - *V16+*
+- **Visual Tests**: Component regression testing (Storybook + Chromatic) - *V16+*
 
 ### Linting
 ```bash

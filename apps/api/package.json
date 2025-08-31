@@ -15,17 +15,18 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "fastify": "latest",
     "@launchkit-ai/sdk": "workspace:*",
     "@prisma/client": "*",
-    "zod": "latest",
+    "fastify": "latest",
     "pino": "latest",
-    "pino-pretty": "latest"
+    "pino-pretty": "latest",
+    "zod": "latest"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "typescript": "^5.5.4",
     "ts-node": "^10.9.2",
-    "vitest": "^2.0.5"
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5",
+    "vitest-mock-extended": "^3.1.0"
   }
 }
