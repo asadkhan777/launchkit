@@ -253,11 +253,40 @@ components:
               description: Unique request identifier for debugging
               example: "req_1234567890"
 
+    HealthStatus:
+      type: object
+      required:
+        - status
+        - timestamp
+      properties:
+        status:
+          type: string
+          enum: [ok, error]
+          description: Overall health status
+          example: "ok"
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when health check was performed
+          example: "2025-08-31T12:00:00.000Z"
+        checks:
+          type: object
+          description: Individual dependency health checks
+          additionalProperties:
+            type: string
+            enum: [ok, error]
+          example:
+            database: "ok"
+        error:
+          type: string
+          description: Error message if status is error
+          example: "Database connection failed"
+
 paths:
   /healthz:
     get:
-      summary: Health check
-      description: Check if the API server is healthy and responding
+      summary: Health check (deprecated - use /readyz)
+      description: Check if the API server is healthy and responding. Alias for /readyz for backward compatibility.
       tags:
         - System
       responses:
@@ -266,11 +295,56 @@ paths:
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '503':
+          description: Server is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+
+  /livez:
+    get:
+      summary: Liveness probe
+      description: Simple check that the server is running. Used for container liveness checks.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Server is running
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
                   status:
                     type: string
+                    enum: [ok]
                     example: "ok"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2025-08-31T12:00:00.000Z"
+
+  /readyz:
+    get:
+      summary: Readiness probe
+      description: Check if the server is ready to handle requests. Includes dependency health checks.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Server is ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '503':
+          description: Server is not ready (dependency failure)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
 
   /import:
     post:

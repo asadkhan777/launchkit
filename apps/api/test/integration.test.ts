@@ -30,7 +30,11 @@ describe('API Integration Tests', () => {
       });
 
       expect(response.statusCode).toBe(200);
-      expect(JSON.parse(response.payload)).toEqual({ status: 'ok' });
+      const body = JSON.parse(response.payload);
+      expect(body.status).toBe('ok');
+      expect(body.timestamp).toBeDefined();
+      expect(body.checks).toBeDefined();
+      expect(body.checks.database).toBe('ok');
     });
   });
 

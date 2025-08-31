@@ -1,0 +1,112 @@
+# Better Stack Uptime Monitoring Configuration
+# This file defines uptime monitors for LaunchKit.ai API endpoints
+
+monitors:
+  - name: "LaunchKit API - Readiness Check"
+    url: "${API_BASE_URL}/readyz"
+    method: GET
+    expected_status_codes: [200]
+    timeout: 10
+    check_frequency: 30
+    regions: ["us-east-1", "eu-west-1"]
+    tags: ["api", "health", "critical"]
+    alert_policy:
+      escalation_type: "immediate"
+      sms_enabled: true
+      email_enabled: true
+      webhook_enabled: true
+    confirmation_period: 30
+    recovery_period: 0
+    
+  - name: "LaunchKit API - Liveness Check"  
+    url: "${API_BASE_URL}/livez"
+    method: GET
+    expected_status_codes: [200]
+    timeout: 5
+    check_frequency: 60
+    regions: ["us-east-1"]
+    tags: ["api", "health", "basic"]
+    alert_policy:
+      escalation_type: "after_5_minutes"
+      sms_enabled: false
+      email_enabled: true
+      webhook_enabled: false
+    confirmation_period: 60
+    recovery_period: 0
+
+  - name: "LaunchKit API - Course Creation"
+    url: "${API_BASE_URL}/courses"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    body: |
+      {
+        "title": "Monitor Test Course",
+        "description": "Automated monitoring test",
+        "ownerId": "monitor-test-user",
+        "lessons": []
+      }
+    expected_status_codes: [201, 400]
+    timeout: 15
+    check_frequency: 300
+    regions: ["us-east-1"]
+    tags: ["api", "business-critical", "e2e"]
+    alert_policy:
+      escalation_type: "after_2_minutes"
+      sms_enabled: true
+      email_enabled: true
+      webhook_enabled: true
+    confirmation_period: 120
+    recovery_period: 0
+
+# Environment-specific configurations
+environments:
+  development:
+    api_base_url: "http://localhost:4000"
+    enabled: false
+    
+  staging:
+    api_base_url: "https://api-staging.launchkit.ai"
+    enabled: true
+    alert_policy_override:
+      sms_enabled: false
+      
+  production:
+    api_base_url: "https://api.launchkit.ai"
+    enabled: true
+
+# Incident response configuration
+incident_response:
+  escalation_rules:
+    - condition: "2 consecutive failures"
+      action: "notify_on_call_engineer"
+      delay: 0
+      
+    - condition: "5 consecutive failures"  
+      action: "escalate_to_engineering_manager"
+      delay: 300
+      
+    - condition: "10 consecutive failures"
+      action: "escalate_to_cto"
+      delay: 600
+
+  notification_channels:
+    slack:
+      webhook_url: "${SLACK_WEBHOOK_URL}"
+      channel: "#alerts-api"
+      
+    pagerduty:
+      integration_key: "${PAGERDUTY_INTEGRATION_KEY}"
+      
+    webhook:
+      url: "${INCIDENT_WEBHOOK_URL}"
+      headers:
+        Authorization: "Bearer ${INCIDENT_WEBHOOK_TOKEN}"
+
+# SLO integration
+slo_tracking:
+  availability_slo: 99.9
+  latency_slo_p95: 200
+  error_budget_alerts:
+    fast_burn_threshold: 14.4  # 2 hour budget exhaustion
+    slow_burn_threshold: 6     # 5 day budget exhaustion
