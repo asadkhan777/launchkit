@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "echo \"No tests in this package yet\"",
+    "test:watch": "echo \"No tests in this package yet\"",
     "lint": "eslint src --ext .ts",
     "type-check": "tsc --noEmit"
   },

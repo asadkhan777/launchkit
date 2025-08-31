@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "test": "vitest run",
-    "test:turbo": "turbo run test",
+    "test": "turbo run test",
+    "test:root": "vitest run",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "type-check": "turbo run type-check",

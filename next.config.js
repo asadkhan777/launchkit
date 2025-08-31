@@ -2,8 +2,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ["localhost:3000"]
+    }
   },
   reactStrictMode: true,
 }
-module.exports = nextConfig
+
+export default nextConfig;

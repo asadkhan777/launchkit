@@ -254,6 +254,24 @@ components:
               example: "req_1234567890"
 
 paths:
+  /healthz:
+    get:
+      summary: Health check
+      description: Check if the API server is healthy and responding
+      tags:
+        - System
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+
   /import:
     post:
       summary: Import content from external source
@@ -334,9 +352,17 @@ paths:
   /courses:
     get:
       summary: List user's courses
-      description: Retrieve all courses created by the authenticated user
+      description: Retrieve all courses created by a specific user
       tags:
         - Course Management
+      parameters:
+        - name: ownerId
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ID of the course owner
+          example: "clp123abc456def789"
       responses:
         '200':
           description: List of courses
@@ -346,6 +372,80 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Course'
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new course
+      description: Create a new course with lessons for the specified owner
+      tags:
+        - Course Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ownerId
+                - title
+                - description
+                - lessons
+              properties:
+                ownerId:
+                  type: string
+                  description: ID of the course owner
+                  example: "clp123abc456def789"
+                title:
+                  type: string
+                  description: Course title
+                  example: "Introduction to JavaScript"
+                description:
+                  type: string
+                  description: Course description
+                  example: "Learn the fundamentals of JavaScript programming"
+                lessons:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - title
+                      - content
+                    properties:
+                      title:
+                        type: string
+                        description: Lesson title
+                        example: "Variables and Data Types"
+                      content:
+                        type: string
+                        description: Lesson content
+                        example: "In this lesson, we'll learn about..."
+                      order:
+                        type: integer
+                        description: Lesson order (optional, defaults to 0)
+                        example: 1
+      responses:
+        '201':
+          description: Course created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
   /courses/{id}:
     get:
