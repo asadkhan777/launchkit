@@ -4,8 +4,20 @@
 Before any code generation, ask: *"Does this change advance the North Star Goal?"*  
 **North Star Goal**: Located in `.github/DEVELOPMENT.md` - reference it for project-specific objectives.
 
+## **MANDATORY: Focused Execution Mode**
+**ALWAYS ACTIVE** - This is the proven velocity optimization that enabled 3x development speed in V7-V8:
+
+1. **Load Context Once**: Read architectural principles and project context at session start
+2. **Execute Without Re-Analysis**: Implement features in focused batches without analysis paralysis
+3. **Batch Related Operations**: Complete entire feature sets in single concentrated sessions
+4. **Defer Major Decisions**: Reserve full analysis only for major architectural decisions
+5. **Maintain Quality Standards**: Comprehensive testing and documentation without velocity loss
+
+**Proven Results**: V7 observability (2 hours vs incremental approach), V8 testing (3x faster, 40/40 tests passing)
+
 ## **Velocity Unlock Principles**
-1. **Focused Execution Mode**: Load architectural principles once per session, then execute implementation tasks without re-analysis paralysis.
+## **Velocity Unlock Principles**
+1. **Focused Execution Mode**: ✅ MANDATORY (see above) - Load architectural principles once per session, then execute implementation tasks without re-analysis paralysis.
 2. **Batch Context Processing**: Complete entire features in focused sessions rather than file-by-file context switching.
 3. **Phase-Appropriate Filtering**: Apply MVP-phase guidelines - defer complex architectural patterns, focus on quality code and comprehensive testing.
 4. **Parallel Implementation**: Use tool parallelization aggressively for independent changes and batch related operations.
