@@ -1,0 +1,101 @@
+
+> launchkit-ai@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions
+> turbo run lint
+
+turbo 2.5.6
+
+• Packages in scope: @launchkit-ai/api, @launchkit-ai/common, @launchkit-ai/sdk, @launchkit-ai/tests, @launchkit-ai/ui, @launchkit-ai/web
+• Running lint in 6 packages
+• Remote caching disabled
+@launchkit-ai/common:lint: cache miss, executing 916d49e1e77ba91f
+@launchkit-ai/web:lint: cache miss, executing d1dfe91aa19b78eb
+@launchkit-ai/sdk:lint: cache miss, executing 0ca7c5895268575c
+@launchkit-ai/ui:lint: cache miss, executing 38a9cf556cce1cda
+@launchkit-ai/sdk:build: cache hit, replaying logs a9e346a181206a88
+@launchkit-ai/sdk:build: 
+@launchkit-ai/sdk:build: > @launchkit-ai/sdk@0.1.0 build /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/sdk
+@launchkit-ai/sdk:build: > tsc --build
+@launchkit-ai/sdk:build: 
+@launchkit-ai/tests:lint: cache miss, executing c7d31b7d6c1521a4
+@launchkit-ai/api:lint: cache miss, executing 6a29d517d3c865d1
+@launchkit-ai/web:lint: 
+@launchkit-ai/web:lint: > @launchkit-ai/web@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/apps/web
+@launchkit-ai/web:lint: > next lint
+@launchkit-ai/web:lint: 
+@launchkit-ai/common:lint: 
+@launchkit-ai/common:lint: > @launchkit-ai/common@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/common
+@launchkit-ai/common:lint: > eslint src --ext .ts
+@launchkit-ai/common:lint: 
+@launchkit-ai/sdk:lint: 
+@launchkit-ai/sdk:lint: > @launchkit-ai/sdk@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/sdk
+@launchkit-ai/sdk:lint: > eslint src --ext .ts
+@launchkit-ai/sdk:lint: 
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: > @launchkit-ai/ui@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui
+@launchkit-ai/ui:lint: > eslint src --ext .ts,.tsx
+@launchkit-ai/ui:lint: 
+@launchkit-ai/api:lint: 
+@launchkit-ai/api:lint: > @launchkit-ai/api@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/apps/api
+@launchkit-ai/api:lint: > eslint src test --config eslint.config.js
+@launchkit-ai/api:lint: 
+@launchkit-ai/tests:lint: 
+@launchkit-ai/tests:lint: > @launchkit-ai/tests@0.1.0 lint /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/tests
+@launchkit-ai/tests:lint: > eslint src --ext .ts
+@launchkit-ai/tests:lint: 
+@launchkit-ai/web:lint: `next lint` is deprecated and will be removed in Next.js 16.
+@launchkit-ai/web:lint: For new projects, use create-next-app to choose your preferred linter.
+@launchkit-ai/web:lint: For existing projects, migrate to the ESLint CLI:
+@launchkit-ai/web:lint: npx @next/codemod@canary next-lint-to-eslint-cli .
+@launchkit-ai/web:lint: 
+@launchkit-ai/ui:lint: (node:27342) ESLintEmptyConfigWarning: Running ESLint with an empty config (from /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/eslint.config.js). Please double-check that this is what you want. If you want to run ESLint with an empty config, export [{}] to remove this warning.
+@launchkit-ai/ui:lint: (Use `node --trace-warnings ...` to show where the warning was created)
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/Button.stories.tsx
+@launchkit-ai/ui:lint:   1:13  error  Parsing error: Unexpected token {
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/Button.tsx
+@launchkit-ai/ui:lint:   3:20  error  Parsing error: Unexpected token VariantProps
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/EmptyState.tsx
+@launchkit-ai/ui:lint:   5:8  error  Parsing error: Unexpected token interface
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/Input.tsx
+@launchkit-ai/ui:lint:   3:20  error  Parsing error: Unexpected token VariantProps
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/Modal.tsx
+@launchkit-ai/ui:lint:   12:51  error  Parsing error: Unexpected token ,
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/Toast.tsx
+@launchkit-ai/ui:lint:   3:20  error  Parsing error: Unexpected token VariantProps
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/__stories__/Button.stories.tsx
+@launchkit-ai/ui:lint:   1:13  error  Parsing error: Unexpected token {
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/__stories__/EmptyState.stories.tsx
+@launchkit-ai/ui:lint:   1:13  error  Parsing error: Unexpected token {
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/__stories__/Input.stories.tsx
+@launchkit-ai/ui:lint:   1:13  error  Parsing error: Unexpected token {
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/components/__stories__/Modal.stories.tsx
+@launchkit-ai/ui:lint:   1:13  error  Parsing error: Unexpected token {
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/index.ts
+@launchkit-ai/ui:lint:   3:8  error  Parsing error: Unexpected token type
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: /Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui/src/utils.ts
+@launchkit-ai/ui:lint:   1:15  error  Parsing error: Unexpected token ClassValue
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint: ✖ 12 problems (12 errors, 0 warnings)
+@launchkit-ai/ui:lint: 
+@launchkit-ai/ui:lint:  ELIFECYCLE  Command failed with exit code 1.
+@launchkit-ai/ui:lint: ERROR: command finished with error: command (/Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui) /Users/asadkhan/Library/pnpm/.tools/pnpm/9.0.0/bin/pnpm run lint exited (1)
+@launchkit-ai/ui#lint: command (/Users/asadkhan/Developer/Personal/LaunchKit/launchkit-v2-with-instructions/packages/ui) /Users/asadkhan/Library/pnpm/.tools/pnpm/9.0.0/bin/pnpm run lint exited (1)
+
+ Tasks:    1 successful, 7 total
+Cached:    1 cached, 7 total
+  Time:    1.389s 
+Failed:    @launchkit-ai/ui#lint
+
+ ERROR  run failed: command  exited (1)
+ ELIFECYCLE  Command failed with exit code 1.
