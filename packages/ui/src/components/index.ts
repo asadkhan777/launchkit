@@ -1,2 +1,2 @@
 // UI components
-export * from './Button.jsx';
+export * from './Button';

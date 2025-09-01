@@ -290,11 +290,11 @@ Common edit patterns with examples
 
 ### **Postmortem Convention**
 
-All version postmortems are stored in `/postmortems/` directory:
-
-- `postmortems/instructions_postmortem_v0.md` - Initial setup and foundation
-- `postmortems/instructions_postmortem_v9.md` - Testing infrastructure
-- `postmortems/instructions_postmortem_v10.md` - Performance optimizations
+- All version postmortems are stored in `/postmortems/` directory:
+- For Example:
+  -- `postmortems/instructions_postmortem_v0.md` - Initial setup and foundation
+  -- `postmortems/instructions_postmortem_v9.md` - Testing infrastructure
+  -- `postmortems/instructions_postmortem_v10.md` - Performance optimizations
 - Future versions follow same pattern: `postmortems/instructions_postmortem_vX.md`
 
 **💡 Remember**: Every change should make the codebase better, faster, or more maintainable. When in doubt, choose simplicity over cleverness.

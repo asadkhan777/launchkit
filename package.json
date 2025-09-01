@@ -31,6 +31,8 @@
     "test:e2e:debug": "playwright test --debug",
     "test:storybook": "cd packages/ui && pnpm test-storybook",
     "test:visual": "cd packages/ui && pnpm chromatic",
+    "storybook": "cd packages/ui && pnpm storybook",
+    "storybook:build": "cd packages/ui && pnpm build-storybook",
     "test:watch": "turbo run test:watch",
     "test:coverage": "turbo run test --filter='@launchkit-ai/*' -- --coverage",
     "test:clean": "find . -name 'test-*.db' -delete && find . -name '*.tsbuildinfo' -delete",
@@ -77,6 +79,9 @@
     "autoprefixer": "10.4.19",
     "axe-playwright": "^2.1.0",
     "eslint": "^9.6.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^8.0.0",
     "jest-image-snapshot": "^6.5.1",
     "lint-staged": "^15.0.0",
@@ -93,10 +98,7 @@
     "vitest": "^3.2.4"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
+    "*.{js,jsx,ts,tsx}": "bash -c 'if [[ \"$0\" != *\".storybook\"* ]] && [[ \"$0\" != *\"storybook-static\"* ]]; then eslint \"$0\" --fix && prettier \"$0\" --write; fi'",
     "*.{json,md,yaml,yml}": [
       "prettier --write"
     ]
