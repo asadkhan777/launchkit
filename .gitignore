@@ -6,3 +6,10 @@ node_modules
 .cache
 dist
 *.log
+.turbo/**/**/
+.idea
+.vscode
+.DS_Store
+*.tar.zst
+prisma/dev.db
+packages/ui/tsconfig.tsbuildinfo

@@ -14,12 +14,11 @@
   "dependencies": {
     "fastify": "latest",
     "pino": "latest",
-    "zod": "latest",
-    "@prisma/client": "*"
+    "zod": "latest"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
     "typescript": "^5.5.4",
-    "vitest": "*"
+    "vitest": "^3.2.4"
   }
 }

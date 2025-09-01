@@ -33,9 +33,14 @@
     "test:visual": "cd packages/ui && pnpm chromatic",
     "test:watch": "turbo run test:watch",
     "test:coverage": "turbo run test --filter='@launchkit-ai/*' -- --coverage",
-    "test:clean": "find . -name 'test-*.db' -delete && find . -name '__snapshots__' -type d -exec rm -rf {} + 2>/dev/null || true"
+    "test:clean": "find . -name 'test-*.db' -delete && find . -name '*.tsbuildinfo' -delete",
+    "test:security": "cd apps/api && pnpm test:security",
+    "security:scan": "semgrep scan --config=.semgrep.yml --error",
+    "security:deps": "pnpm audit --audit-level=high"
   },
   "dependencies": {
+    "@fastify/caching": "^9.0.3",
+    "@fastify/compress": "^8.0.0",
     "@hookform/resolvers": "3.2.0",
     "@mozilla/readability": "0.6.0",
     "@opentelemetry/api": "^1.9.0",
@@ -65,9 +70,10 @@
     "@types/node": "^20.14.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "@vitest/ui": "^2.0.5",
+    "@vitest/ui": "^3.2.4",
     "autoprefixer": "10.4.19",
     "axe-playwright": "^2.1.0",
     "eslint": "^9.6.0",
@@ -76,12 +82,15 @@
     "lint-staged": "^15.0.0",
     "postcss": "8.4.39",
     "prettier": "^3.0.0",
+    "semgrep": "^0.0.1",
+    "supertest": "^7.1.4",
     "tailwindcss": "3.4.9",
     "testcontainers": "^11.5.1",
     "ts-node": "^10.9.2",
     "turbo": "^2.0.0",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

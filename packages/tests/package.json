@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "echo \"No tests in this package yet\"",
-    "test:watch": "echo \"No tests in this package yet\"",
+    "test": "vitest run --config=vitest.config.ts",
+    "test:watch": "vitest --config=vitest.config.ts",
     "lint": "eslint src --ext .ts",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@launchkit-ai/sdk": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "^20.14.9",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "vitest": "^3.2.4"
   }
 }
