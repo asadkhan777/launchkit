@@ -48,11 +48,24 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: './tsconfig.json',
+        // Remove project reference for test files to avoid tsconfig issues
       },
       globals: {
         console: 'readonly',
         process: 'readonly',
+        // Node.js globals
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        global: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        exports: 'readonly',
+        Buffer: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        // Test framework globals
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly',
