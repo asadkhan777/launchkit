@@ -47,6 +47,9 @@ LaunchKit.ai/
 │   ├── common/           # Shared utilities
 │   ├── ui/               # Component library
 │   └── tests/            # Test utilities
+├── instructions/         # Development version instructions
+├── postmortems/          # Version completion postmortems
+├── docs/                 # Technical documentation
 └── .github/              # DevOps & guidelines
 ```
 
@@ -275,5 +278,23 @@ Common edit patterns with examples
 - Add API endpoints in `apps/api/src/index.ts` inside `createApp()` to ensure tests can import `createApp()` without starting servers.
 - Use Zod schemas located in `@launchkit-ai/sdk` for request validation (e.g., `CourseCreateSchema`).
 - For caching/compression, register plugins in `createApp()` (see V10 additions: `@fastify/compress`, `node-cache`) and expose behavior via headers (`X-Cache`, `Cache-Control`).
+
+## **📝 Development Process**
+
+### **Version Development Cycle**
+
+1. **Instructions**: Implementation guidelines in `instructions/instructions_vX.md`
+2. **Development**: Iterative implementation following instructions
+3. **Postmortem**: Completion summary in `postmortems/instructions_postmortem_vX.md`
+4. **Commit**: Version completion with comprehensive commit message
+
+### **Postmortem Convention**
+
+All version postmortems are stored in `/postmortems/` directory:
+
+- `postmortems/instructions_postmortem_v0.md` - Initial setup and foundation
+- `postmortems/instructions_postmortem_v9.md` - Testing infrastructure
+- `postmortems/instructions_postmortem_v10.md` - Performance optimizations
+- Future versions follow same pattern: `postmortems/instructions_postmortem_vX.md`
 
 **💡 Remember**: Every change should make the codebase better, faster, or more maintainable. When in doubt, choose simplicity over cleverness.
