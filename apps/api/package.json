@@ -8,25 +8,38 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc --build",
     "start": "node dist/index.js",
-    "test": "vitest run --config=vitest.config.ts",
+    "test": "vitest run --config=vitest.config.ts test/ --exclude=test/security/ --reporter=verbose",
+    "test:unit": "vitest run --config=vitest.config.ts test/unit/",
+    "test:integration": "vitest run --config=vitest.config.ts test/integration/",
+    "test:security": "vitest run --config=vitest.security.config.ts test/security/",
+    "test:all": "pnpm test && pnpm test:security",
     "test:watch": "vitest --config=vitest.config.ts",
     "test:setup": "echo 'Test setup handled by vitest config'",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src test --config eslint.config.js",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "fastify": "^5.5.0",
+    "@fastify/helmet": "^13.0.1",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/compress": "^8.0.0",
     "@launchkit-ai/sdk": "workspace:*",
-    "@prisma/client": "*",
-    "fastify": "latest",
+    "node-cache": "^5.1.2",
     "pino": "latest",
     "pino-pretty": "latest",
     "zod": "latest"
   },
   "devDependencies": {
+    "@eslint/js": "^9.34.0",
     "@types/node": "^20.14.9",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5",
-    "vitest-mock-extended": "^3.1.0"
+    "vitest": "^3.2.4",
+    "vitest-mock-extended": "^3.1.0",
+    "supertest": "^7.1.4",
+    "@types/supertest": "^6.0.3"
   }
 }

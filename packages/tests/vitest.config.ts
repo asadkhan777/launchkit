@@ -4,19 +4,13 @@ import path from 'path';
 export default defineConfig({
   test: {
     environment: 'node',
-    setupFiles: ['./test/setup.ts'],
     globals: true,
     testTimeout: 30000,
-    // Ensure tests run sequentially to avoid database conflicts
+    // Allow concurrent execution for fast tests
     sequence: {
-      concurrent: false,
-    },
-    env: {
-      NODE_ENV: 'test',
-      DATABASE_URL: 'file:./db/test-api.db',
+      concurrent: true,
     },
     include: ['test/**/*.test.ts'],
-    exclude: ['test/security/**'], // Exclude security tests from main test run
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

@@ -13,8 +13,8 @@
     },
     "test": {
       "dependsOn": ["build", "prisma:generate"],
-      "outputs": ["coverage/**"],
-      "cache": false,
+      "outputs": [],
+      "cache": true,
       "env": ["NODE_ENV", "DATABASE_URL"]
     },
     "test:watch": {
@@ -31,7 +31,7 @@
       "outputs": []
     },
     "prisma:generate": {
-      "cache": false,
+      "cache": true,
       "outputs": ["node_modules/.prisma/**"]
     },
     "prisma:migrate": {

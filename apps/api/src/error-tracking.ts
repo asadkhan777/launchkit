@@ -1,21 +1,30 @@
 import * as Sentry from '@sentry/node';
 
+let sentryInitialized = false;
+
 /**
  * Initialize Sentry error tracking for the API service.
  * This should be called early in the application startup.
  */
 export function initializeSentry(): void {
+  if (sentryInitialized) {
+    return;
+  }
+
   const dsn = process.env.SENTRY_DSN;
-  
+
   if (!dsn) {
     console.warn('SENTRY_DSN not configured, error tracking disabled');
+    sentryInitialized = true;
     return;
   }
 
   try {
     Sentry.init({
       dsn,
-      tracesSampleRate: parseFloat(process.env.SENTRY_TRACES_SAMPLE_RATE || '0.1'),
+      tracesSampleRate: parseFloat(
+        process.env.SENTRY_TRACES_SAMPLE_RATE || '0.1'
+      ),
       environment: process.env.NODE_ENV || 'development',
       // Don't capture console.log statements
       integrations: [
@@ -38,10 +47,12 @@ export function initializeSentry(): void {
         return event;
       },
     });
-    
+
+    sentryInitialized = true;
     console.log('Sentry error tracking initialized');
   } catch (error) {
     console.error('Failed to initialize Sentry:', error);
+    sentryInitialized = true; // Prevent retry attempts
     // Don't throw - error tracking failure shouldn't crash the service
   }
 }
@@ -50,9 +61,12 @@ export function initializeSentry(): void {
  * Capture an exception with Sentry.
  * Use this for manual error reporting.
  */
-export function captureException(error: Error, context?: Record<string, any>): void {
+export function captureException(
+  error: Error,
+  context?: Record<string, any>
+): void {
   if (context) {
-    Sentry.withScope((scope) => {
+    Sentry.withScope(scope => {
       Object.entries(context).forEach(([key, value]) => {
         scope.setTag(key, value);
       });
@@ -67,7 +81,10 @@ export function captureException(error: Error, context?: Record<string, any>): v
  * Capture a message with Sentry.
  * Use this for non-error events that should be tracked.
  */
-export function captureMessage(message: string, level: 'info' | 'warning' | 'error' = 'info'): void {
+export function captureMessage(
+  message: string,
+  level: 'info' | 'warning' | 'error' = 'info'
+): void {
   Sentry.captureMessage(message, level);
 }
 
