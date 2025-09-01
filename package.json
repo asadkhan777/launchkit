@@ -98,7 +98,10 @@
     "vitest": "^3.2.4"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "bash -c 'if [[ \"$0\" != *\".storybook\"* ]] && [[ \"$0\" != *\"storybook-static\"* ]]; then eslint \"$0\" --fix && prettier \"$0\" --write; fi'",
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "*.{json,md,yaml,yml}": [
       "prettier --write"
     ]
