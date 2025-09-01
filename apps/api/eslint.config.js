@@ -1,93 +1,19 @@
-import js from '@eslint/js';
-import typescript from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
+import baseConfig, {
+  createTypeScriptConfig,
+  createTestConfig,
+} from '../../eslint.config.base.js';
 
+/**
+ * API package ESLint configuration
+ * Extends base config with API-specific rules
+ */
 export default [
-  js.configs.recommended,
-  {
-    files: ['src/**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: typescriptParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: './tsconfig.json',
-      },
-      globals: {
-        console: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        global: 'readonly',
-        module: 'readonly',
-        require: 'readonly',
-        exports: 'readonly',
-        fetch: 'readonly',
-        Request: 'readonly',
-        Response: 'readonly',
-        URL: 'readonly',
-        URLSearchParams: 'readonly',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': typescript,
-    },
-    rules: {
-      ...typescript.configs.recommended.rules,
-      '@typescript-eslint/no-explicit-any': 'warn',
-      'no-console': ['warn', { allow: ['info', 'warn', 'error'] }],
-      '@typescript-eslint/no-unused-vars': 'warn',
-      'no-unused-vars': 'off',
-    },
-  },
-  {
-    files: ['test/**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: typescriptParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        // Remove project reference for test files to avoid tsconfig issues
-      },
-      globals: {
-        console: 'readonly',
-        process: 'readonly',
-        // Node.js globals
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        global: 'readonly',
-        module: 'readonly',
-        require: 'readonly',
-        exports: 'readonly',
-        Buffer: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        // Test framework globals
-        describe: 'readonly',
-        it: 'readonly',
-        expect: 'readonly',
-        beforeAll: 'readonly',
-        afterAll: 'readonly',
-        beforeEach: 'readonly',
-        afterEach: 'readonly',
-        vi: 'readonly',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': typescript,
-    },
-    rules: {
-      ...typescript.configs.recommended.rules,
-      '@typescript-eslint/no-explicit-any': 'off', // Allow any in tests
-      'no-console': 'off', // Allow console in tests
-      '@typescript-eslint/no-unused-vars': 'warn',
-      'no-unused-vars': 'off',
-    },
-  },
-  {
-    ignores: ['dist/**', 'node_modules/**', 'coverage/**'],
-  },
+  ...baseConfig,
+  // API TypeScript configuration
+  createTypeScriptConfig({
+    packageType: 'api',
+    tsconfigPath: './tsconfig.json',
+  }),
+  // API test configuration
+  createTestConfig({ hasReact: false }),
 ];

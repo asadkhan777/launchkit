@@ -1,46 +1,103 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalDependencies": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "tsconfig.json",
+    "eslint.config.base.js",
+    "turbo.json"
+  ],
+  "globalEnv": ["NODE_ENV", "CI", "VERCEL", "GITHUB_ACTIONS"],
   "tasks": {
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["build"]
+      "dependsOn": ["^build", "prisma:generate"],
+      "env": [
+        "NODE_ENV",
+        "PORT",
+        "DATABASE_URL",
+        "SENTRY_DSN",
+        "OTEL_EXPORTER_OTLP_ENDPOINT"
+      ]
     },
     "build": {
       "dependsOn": ["^build", "prisma:generate"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "build/**",
+        "storybook-static/**"
+      ],
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "DATABASE_URL"]
     },
     "test": {
-      "dependsOn": ["build", "prisma:generate"],
-      "outputs": [],
+      "dependsOn": ["^build", "prisma:generate"],
+      "outputs": ["coverage/**", "test-results/**", "playwright-report/**"],
       "cache": true,
-      "env": ["NODE_ENV", "DATABASE_URL"]
+      "env": ["NODE_ENV", "DATABASE_URL", "CI", "GITHUB_ACTIONS"],
+      "inputs": [
+        "src/**",
+        "test/**",
+        "*.test.{ts,tsx,js,jsx}",
+        "*.spec.{ts,tsx,js,jsx}",
+        "vitest.config.{ts,js}",
+        "playwright.config.{ts,js}",
+        "jest.config.{ts,js}"
+      ]
     },
     "test:watch": {
-      "dependsOn": ["build", "prisma:generate"],
+      "dependsOn": ["^build", "prisma:generate"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["NODE_ENV", "DATABASE_URL"]
     },
     "lint": {
-      "dependsOn": ["^lint"],
-      "outputs": []
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "cache": true,
+      "inputs": [
+        "src/**",
+        "*.{ts,tsx,js,jsx}",
+        "eslint.config.js",
+        "../eslint.config.base.js",
+        "../../eslint.config.base.js"
+      ]
     },
     "type-check": {
-      "dependsOn": ["^type-check"],
-      "outputs": []
+      "dependsOn": ["^build", "prisma:generate"],
+      "outputs": ["**/*.tsbuildinfo"],
+      "cache": true,
+      "inputs": ["src/**", "**/*.{ts,tsx}", "tsconfig.json", "package.json"]
     },
     "prisma:generate": {
       "cache": true,
-      "outputs": ["node_modules/.prisma/**"]
+      "outputs": ["node_modules/.prisma/**", "prisma/generated/**"],
+      "inputs": ["prisma/schema.prisma"]
     },
     "prisma:migrate": {
       "cache": false,
+      "dependsOn": ["prisma:generate"],
       "outputs": ["prisma/migrations/**"]
     },
     "prisma:push": {
       "cache": false,
+      "dependsOn": ["prisma:generate"],
       "outputs": []
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"],
+      "env": ["NODE_ENV"]
+    },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"],
+      "cache": true,
+      "inputs": ["src/**", ".storybook/**", "**/*.stories.{ts,tsx,js,jsx}"]
     }
   }
 }
