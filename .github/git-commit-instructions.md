@@ -1,11 +1,13 @@
 # Git Commit Message Guidelines - LaunchKit.ai
 
 ## **Overview**
+
 Consistent, readable, and traceable commit history for the LaunchKit.ai AI-powered course creation platform. These guidelines ensure clear communication of changes across frontend, backend, and infrastructure components.
 
 ## **Commit Message Format**
 
 ### **Standard Structure**
+
 ```
 <type>(<scope>): <description>
 
@@ -17,6 +19,7 @@ Consistent, readable, and traceable commit history for the LaunchKit.ai AI-power
 ### **Required Elements**
 
 #### **Type Categories**
+
 - **feat**: New feature or enhancement
 - **fix**: Bug fix or issue resolution
 - **refactor**: Code restructuring without behavior change
@@ -29,9 +32,11 @@ Consistent, readable, and traceable commit history for the LaunchKit.ai AI-power
 - **chore**: Maintenance tasks and tooling
 
 #### **Scope Guidelines**
+
 Use relevant component/module names:
 
 **Frontend Scopes:**
+
 - `web`: Next.js application changes
 - `ui`: React component library
 - `pages`: Page-level components
@@ -42,6 +47,7 @@ Use relevant component/module names:
 - `forms`: Form components and validation
 
 **Backend Scopes:**
+
 - `api`: Fastify API server
 - `sdk`: Core business logic package
 - `db`: Database schema or migrations
@@ -51,6 +57,7 @@ Use relevant component/module names:
 - `routes`: API route handlers
 
 **Infrastructure Scopes:**
+
 - `monorepo`: Workspace and tooling configuration
 - `build`: Build system changes
 - `deps`: Dependency updates
@@ -60,6 +67,7 @@ Use relevant component/module names:
 - `docker`: Container configuration
 
 **Domain Scopes:**
+
 - `courses`: Course-related functionality
 - `users`: User management
 - `ai`: AI/LLM integration
@@ -71,14 +79,17 @@ Use relevant component/module names:
 ## **Writing Guidelines**
 
 ### **Description Rules**
+
 - Use imperative mood in present tense ("Add", "Fix", "Update")
 - Start with capital letter
 - No period at the end
-- Maximum 50 characters
+- Maximum 50 characters for the description
+- Limit all lines to less than 100 characters
 - Be specific and descriptive
 - Focus on **what** changed, not **how**
 
 ### **Examples of Good Commit Messages**
+
 ```
 feat(courses): Add AI-powered course outline generation
 fix(api): Resolve validation error for course creation
@@ -91,6 +102,7 @@ build(monorepo): Configure Turborepo caching for faster builds
 ```
 
 ### **Examples of Poor Commit Messages**
+
 ```
 ❌ Fixed bug
 ❌ Updated code
@@ -104,6 +116,7 @@ build(monorepo): Configure Turborepo caching for faster builds
 ## **Body Guidelines (Optional)**
 
 ### **When to Include Body**
+
 - Breaking changes requiring explanation
 - Complex business logic changes
 - Performance improvements with metrics
@@ -111,6 +124,7 @@ build(monorepo): Configure Turborepo caching for faster builds
 - Large refactoring efforts
 
 ### **Body Format**
+
 - Separate from description with blank line
 - Wrap at 72 characters
 - Explain **why** and **context**, not **how**
@@ -118,6 +132,7 @@ build(monorepo): Configure Turborepo caching for faster builds
 - Include performance impact when relevant
 
 ### **Body Examples**
+
 ```
 feat(ai): Implement streaming course generation
 
@@ -132,6 +147,7 @@ BREAKING CHANGE: CourseGenerator.generate() now returns AsyncIterable<string>
 ## **Footer Guidelines (Optional)**
 
 ### **Footer Types**
+
 - **Breaking Changes**: `BREAKING CHANGE: description`
 - **Issue References**: `Fixes #123`, `Closes #456`, `Refs #789`
 - **Co-authored**: `Co-authored-by: Name <email@example.com>`
@@ -140,18 +156,21 @@ BREAKING CHANGE: CourseGenerator.generate() now returns AsyncIterable<string>
 ## **LaunchKit.ai Specific Conventions**
 
 ### **AI/ML Domain Context**
+
 - Reference specific AI capabilities when relevant
 - Mention model performance improvements
 - Include training data or prompt changes
 - Reference content generation quality enhancements
 
 ### **Course Creation Workflow**
+
 - Mention user-facing impact for UX changes
 - Reference specific course creation steps
 - Include content processing improvements
 - Mention import/export functionality changes
 
 ### **Performance Considerations**
+
 - Include metrics for performance changes
 - Reference specific optimization techniques
 - Mention bundle size impact for frontend
@@ -160,6 +179,7 @@ BREAKING CHANGE: CourseGenerator.generate() now returns AsyncIterable<string>
 ## **Validation Checklist**
 
 Before committing, ensure your message:
+
 - [ ] Uses correct type and scope format
 - [ ] Written in imperative mood
 - [ ] Under 50 characters for description
@@ -171,6 +191,7 @@ Before committing, ensure your message:
 ## **Advanced Examples**
 
 ### **Feature Development**
+
 ```
 feat(generation): Add multi-language course support
 
@@ -183,6 +204,7 @@ Closes #234
 ```
 
 ### **Performance Optimization**
+
 ```
 perf(api): Optimize course listing endpoint
 
@@ -197,6 +219,7 @@ Benchmark results:
 ```
 
 ### **Breaking Change**
+
 ```
 refactor(sdk): Restructure course data model
 
@@ -210,6 +233,7 @@ Migration guide: https://docs.launchkit.ai/migration/v2
 ```
 
 ### **Bug Fix with Context**
+
 ```
 fix(web): Resolve course import failure on large files
 
@@ -224,6 +248,7 @@ Fixes #567
 ## **Branch Naming Conventions**
 
 ### **Branch Types**
+
 - **Feature**: `feature/add-course-templates`
 - **Bugfix**: `fix/course-generation-timeout`
 - **Hotfix**: `hotfix/security-vulnerability`
@@ -231,6 +256,7 @@ Fixes #567
 - **Docs**: `docs/update-api-examples`
 
 ### **Branch Naming Rules**
+
 - Use lowercase with hyphens
 - Be descriptive but concise
 - Include issue number when applicable: `feature/123-add-course-templates`
@@ -239,19 +265,24 @@ Fixes #567
 ## **Integration with Development Workflow**
 
 ### **Pull Request Title Format**
+
 Use same format as commit messages:
+
 ```
 feat(courses): Add AI-powered course outline generation
 ```
 
 ### **Commit Squashing Guidelines**
+
 - Squash commits for single logical changes
 - Preserve individual commits for complex features
 - Use descriptive squash commit messages
 - Include all relevant context in final commit
 
 ### **Release Notes Generation**
+
 Commits with these types generate release notes:
+
 - `feat`: New features section
 - `fix`: Bug fixes section
 - `perf`: Performance improvements section
@@ -260,12 +291,14 @@ Commits with these types generate release notes:
 ## **Tools and Automation**
 
 ### **Recommended Tools**
+
 - **commitlint**: Validate commit message format
 - **husky**: Git hooks for commit message validation
 - **conventional-changelog**: Generate changelogs from commits
 - **semantic-release**: Automated versioning and releases
 
 ### **VSCode Extensions**
+
 - **Conventional Commits**: Commit message helper
 - **GitLens**: Enhanced git integration
 - **Git History**: Visual commit history
@@ -282,6 +315,7 @@ Commits with these types generate release notes:
 ## **Common Mistakes to Avoid**
 
 ### **Anti-Patterns**
+
 - Vague descriptions: "Update component"
 - Past tense: "Added new feature"
 - Implementation details: "Changed variable name from x to y"
@@ -289,6 +323,7 @@ Commits with these types generate release notes:
 - Missing scope: "feat: new thing"
 
 ### **Best Practices**
+
 - One logical change per commit
 - Atomic commits that don't break the build
 - Clear business value in description
