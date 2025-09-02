@@ -20,6 +20,8 @@
       "@launchkit/ui/*": ["./packages/ui/src/*"],
       "@launchkit/sdk": ["./packages/sdk/src/index.ts"],
       "@launchkit/sdk/*": ["./packages/sdk/src/*"],
+      "@launchkit-ai/lib": ["./packages/lib/src/index.ts"],
+      "@launchkit-ai/lib/*": ["./packages/lib/src/*"],
       "@launchkit/tests": ["./packages/tests/src/index.ts"],
       "@launchkit/tests/*": ["./packages/tests/src/*"]
     },
@@ -41,13 +43,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "apps/**/*",
-    "packages/**/*"
+    "packages/**/*",
+    "lib/**/*"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "**/node_modules",
-    "**/dist",
-    "**/build"
-  ]
+  "exclude": ["node_modules", ".next", "**/node_modules", "**/dist", "**/build"]
 }

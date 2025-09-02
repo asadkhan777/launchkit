@@ -10,7 +10,7 @@ export default async function DashboardPage() {
         <p>No courses yet.</p>
       ) : (
         <ul className="space-y-4">
-          {courses.map(course => (
+          {courses.map((course: any) => (
             <li key={course.id} className="rounded-lg border p-4">
               <h2 className="text-xl font-semibold">{course.title}</h2>
               <p className="text-sm text-neutral-600">
