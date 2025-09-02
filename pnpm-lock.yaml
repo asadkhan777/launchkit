@@ -179,6 +179,9 @@ importers:
       '@fastify/rate-limit':
         specifier: ^10.3.0
         version: 10.3.0
+      '@launchkit-ai/lib':
+        specifier: workspace:*
+        version: link:../../packages/lib
       '@launchkit-ai/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
@@ -234,6 +237,15 @@ importers:
 
   apps/web:
     dependencies:
+      '@launchkit-ai/lib':
+        specifier: workspace:*
+        version: link:../../packages/lib
+      '@launchkit-ai/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      lucide-react:
+        specifier: ^0.542.0
+        version: 0.542.0(react@18.2.0)
       next:
         specifier: 15.5.2
         version: 15.5.2(@opentelemetry/api@1.9.0)(@playwright/test@1.55.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -268,6 +280,8 @@ importers:
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
+
+  packages/lib: {}
 
   packages/sdk:
     dependencies:

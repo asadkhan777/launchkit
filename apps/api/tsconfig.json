@@ -10,9 +10,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@test/*": ["./test/*"]
+      "@test/*": ["./test/*"],
+      "@/lib/*": ["../../lib/*"],
+      "@/lib": ["../../lib"]
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules", "test"]
+  "exclude": ["dist", "node_modules", "test"],
+  "references": [{ "path": "../../" }]
 }

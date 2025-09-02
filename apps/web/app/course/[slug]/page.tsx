@@ -17,7 +17,7 @@ export default async function CoursePage({ params }: { params: Params }) {
       <h1 className="mb-4 text-3xl font-bold">{course.title}</h1>
       <p className="mb-6 text-neutral-700">{course.description}</p>
       <ol className="mb-6 list-decimal space-y-2 pl-4">
-        {course.lessons.map((lesson, i) => (
+        {course.lessons.map((lesson: any, i: number) => (
           <li key={lesson.id} className="font-medium">
             {i + 1}. {lesson.title}
           </li>

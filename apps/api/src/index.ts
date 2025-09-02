@@ -24,6 +24,10 @@ import {
 } from '@launchkit-ai/sdk';
 import { z } from 'zod';
 import { registerHealthChecks } from './health.js';
+import registerImportRoute from './routes/import.js';
+import registerGenerateRoute from './routes/generate.js';
+import registerCheckoutRoute from './routes/checkout.js';
+import registerStripeWebhook from './routes/stripeWebhook.js';
 
 // Query parameter schema for listing courses
 const ListCoursesQuerySchema = z.object({
@@ -109,6 +113,12 @@ export async function createApp(): Promise<FastifyInstance> {
 
   // Register health check endpoints
   registerHealthChecks(app, getPrismaClient());
+
+  // Register legacy-compatible routes (import/generate/checkout/webhooks)
+  await registerImportRoute(app);
+  await registerGenerateRoute(app);
+  await registerCheckoutRoute(app);
+  await registerStripeWebhook(app);
 
   // Global error handler with Sentry integration
   app.setErrorHandler(async (error, request, reply) => {

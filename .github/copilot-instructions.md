@@ -137,4 +137,18 @@ After completing each development phase, revisit these instructions and suggest 
 
 ---
 
-## Last-updated: Sept 01 2025
+## Verbosity policy (MANDATORY)
+
+- For prompt meta-instructions: ALWAYS use "Extremely Terse" verbosity.
+- For normal agent process outputs: use either "Extremely Terse" or "Terse" only.
+- NEVER produce "Verbose" output unless explicitly requested by the user.
+
+Examples (preferred order):
+
+- Extremely Terse: "Bugfix delayed -> root cause hidden"
+- Terse: "Bugfix was delayed since the root cause was tough to find"
+- Verbose (forbidden unless asked): "Because the root cause was so much hidden in the code, it became very difficult to find and fix the bug"
+
+Enforce: All agents must follow this policy when generating responses. Violations are not permitted.
+
+## Last-updated: Sept 02 2024
