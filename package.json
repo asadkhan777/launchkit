@@ -88,9 +88,9 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "husky": "^8.0.0",
     "jest-image-snapshot": "^6.5.1",
     "lint-staged": "^15.0.0",
+    "lucide-react": "^0.542.0",
     "postcss": "8.4.39",
     "prettier": "^3.0.0",
     "semgrep": "^0.0.1",
@@ -101,8 +101,7 @@
     "turbo": "^2.0.0",
     "typescript": "^5.5.4",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4",
-    "lucide-react": "^0.542.0"
+    "vitest": "^3.2.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
