@@ -1,165 +1,39 @@
-# LaunchKit.ai
+# LaunchKit AI - User-Need Driven Development
 
-*Created on 2025-08-29*
+*Restarted on 2025-09-22*
 
-LaunchKit.ai is an AI-powered course creation platform that helps you transform any content into engaging micro-courses. Built with a modern monorepo architecture using Next.js, TypeScript, and Prisma.
+A course creation platform that transforms expertise into revenue, built using **user-need driven methodology**.
 
-## Overview
+## Approach
 
-This platform enables you to paste a URL (Notion, blog, etc.) and automatically extract content to generate comprehensive 5-day micro-course outlines, email sequences, and landing pages. Built for rapid iteration from idea to monetization.
+This project follows a structured, user-centric development process:
 
-## Architecture
+1. **User Pain Point Definition** - Succinct, measurable, validated with real users
+2. **User Stories & Use Cases** - Explicit success criteria and acceptance tests
+3. **UX Flows** - How each flow directly addresses user pain points
+4. **FE-BE Contracts** - Data flows, validation, transport, processing
+5. **Backend Architecture** - Built to serve actual user needs from contracts
+6. **Frontend Architecture** - Driven by UX flows and contracts
+7. **UI Design** - Refined to serve proven user journeys
+8. **Navigation & Auth** - Implemented when user flows are validated
 
-### Monorepo Structure
-```
-apps/
-├── api/          # Fastify REST API server
-└── web/          # Next.js frontend application
+## Archive
 
-packages/
-├── sdk/          # Backend SDK with Prisma & database operations
-├── common/       # Shared utilities and types
-├── ui/           # React UI component library
-└── tests/        # Centralized testing utilities
-```
+Previous infrastructure-first approach (V1-V11.5) is archived in `/archive/` directory for reference and learning.
 
-### Technology Stack
-- **Frontend**: Next.js 15, React 18, TypeScript
-- **Backend**: Fastify REST API wrapping SDK functionality
-- **Database**: Prisma ORM with SQLite (dev) / PostgreSQL (prod)
-- **Testing**: Vitest with comprehensive integration tests
-- **Tooling**: Turborepo, ESLint, Prettier, Husky
+## Getting Started
 
-## Features
+Ready to begin with **Step 1: User Pain Point Definition**.
 
-- 🔗 **Content Import**: Paste URLs to extract and process content
-- 🤖 **AI Generation**: Create 5-day micro-course outlines and email sequences  
-- 📊 **Dashboard**: Manage and organize your courses
-- 💳 **Payments**: Stripe integration for monetization
-- 🧪 **Testing**: Comprehensive test coverage with database isolation
-- 📦 **Monorepo**: Scalable architecture with shared packages
+## Why User-Need Driven?
 
-## Quick Start
+Our previous infrastructure-first approach took 6+ hours to deliver basic user value. This methodology prioritizes user validation and value delivery from day one.
 
-1. **Install dependencies**
-```bash
-pnpm install
-```
+### Key Learnings from V1-V11.5
 
-2. **Setup database**
-```bash
-pnpm prisma generate
-pnpm prisma db push
-```
+- Build for users, not for engineering elegance
+- Validate assumptions before building infrastructure  
+- UX flows should drive technical decisions
+- Progressive complexity based on real user needs
 
-3. **Configure environment**
-```bash
-cp .env.example .env
-# Fill in STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_ID
-```
 
-4. **Run development servers**
-```bash
-# Start all services
-pnpm dev
-
-# Or start individually
-pnpm --filter @launchkit-ai/web dev    # Frontend (port 3000)
-pnpm --filter @launchkit-ai/api dev    # API (port 8000)
-```
-
-5. **Run tests**
-```bash
-pnpm test                 # All packages
-pnpm test:watch          # Watch mode
-```
-
-## API Endpoints
-
-### Health Check
-- `GET /healthz` - Server health status
-
-### Courses
-- `POST /courses` - Create a new course
-- `GET /courses?ownerId={id}` - List courses by owner
-
-## Development Workflow
-
-### Building
-```bash
-pnpm build              # Build all packages
-pnpm --filter web build # Build specific package
-```
-
-### Testing
-
-#### Comprehensive Test Suite
-```bash
-# Run all tests across the entire monorepo
-pnpm test                    # All packages (unit + integration)
-
-# Component-specific testing
-pnpm test:api               # API integration & unit tests
-pnpm test:sdk               # SDK unit tests  
-pnpm test:web               # Web app tests (when available)
-pnpm test:ui                # UI component tests
-pnpm test:common            # Common utilities tests
-
-# Test category targeting
-pnpm test:unit              # All unit tests (SDK + API + UI + Common)
-pnpm test:integration       # Database & API integration tests
-pnpm test:e2e               # End-to-end browser tests (V16+)
-pnpm test:visual            # Visual regression tests (V16+)
-
-# Development & debugging
-pnpm test:watch             # Watch mode for active development
-pnpm test:coverage          # Generate coverage reports
-pnpm test:e2e:ui            # E2E tests with Playwright UI
-pnpm test:e2e:debug         # E2E tests in debug mode
-
-# Utilities
-pnpm test:clean             # Clean up test artifacts (temp DBs, snapshots)
-```
-
-#### Test Architecture
-- **Unit Tests**: Business logic validation (Vitest)
-- **Integration Tests**: Database operations & API endpoints (Vitest + SQLite)
-- **E2E Tests**: Full system workflows (Playwright) - *V16+*
-- **Visual Tests**: Component regression testing (Storybook + Chromatic) - *V16+*
-
-### Linting
-```bash
-pnpm lint               # Lint all packages
-pnpm lint:fix          # Auto-fix linting issues
-```
-
-## Deployment
-
-The monorepo is configured for easy deployment:
-- **Web App**: Deploy Next.js app to Vercel/Netlify
-- **API**: Deploy Fastify server to Railway/Render
-- **Database**: PostgreSQL on Supabase/PlanetScale
-
-## Contributing
-
-1. Follow the established patterns in each package
-2. Add tests for new functionality
-3. Ensure all tests pass: `pnpm test`
-4. Follow commit conventions for changesets
-
-## License
-
-MIT License - see LICENSE file for details.
-
-1. Add a page that saves the draft into the database with a slug
-using a Server Action or API route.
-2. Create a Stripe product & price in your dashboard; set `STRIPE_PRICE_ID`.
-3. Update the buy button to call `/api/checkout` with your course ID + price ID.
-4. Handle the webhook in `app/api/webhooks/stripe/route.ts` to record orders.
-
-For further improvements: server actions, authentication, multi-tenancy,
-improved UI/UX, and connecting to other content sources.
-
-## License
-
-MIT
