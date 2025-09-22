@@ -50,3 +50,4 @@ dist
 *.tar.zst
 prisma/dev.db
 packages/ui/tsconfig.tsbuildinfo
+.turbo/**/**/
