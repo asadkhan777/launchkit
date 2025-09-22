@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@changesets/cli": "^2.27.0",
+    "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
     "@eslint/js": "^9.34.0",
@@ -89,7 +89,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "jest-image-snapshot": "^6.5.1",
-    "lint-staged": "^15.0.0",
+    "lint-staged": "^16.1.6",
     "lucide-react": "^0.542.0",
     "postcss": "8.4.39",
     "prettier": "^3.0.0",
