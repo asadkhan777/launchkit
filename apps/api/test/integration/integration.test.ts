@@ -1,7 +1,7 @@
-import '../setup.ts';
+import '../setup';
 import { beforeAll, afterAll, beforeEach, describe, it, expect } from 'vitest';
 import { FastifyInstance } from 'fastify';
-import { createApp } from '@/index.js';
+import { createApp } from '../../src/index';
 
 describe('API Integration Tests', () => {
   let app: FastifyInstance;
