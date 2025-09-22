@@ -3,9 +3,11 @@
 ## Must-Ship User Stories (MVP)
 
 ### 1. Content Input & Course Generation
+
 **As a solo creator, I can paste a Notion URL or raw text and see a course outline generated so that I can decide whether to proceed.**
 
 **Acceptance criteria:**
+
 - Support Notion URL input with automatic content extraction
 - Support direct text/markdown paste (up to 50k characters)
 - Generate course outline with 3-8 lessons in under 30 seconds
@@ -13,9 +15,11 @@
 - Provide option to regenerate outline with different focus
 
 ### 2. Course Content Review & Editing
+
 **As a creator, I can review and edit the auto-generated lessons and emails before publishing, so that the course reflects my voice.**
 
 **Acceptance criteria:**
+
 - Display generated lessons in editable interface
 - Show email sequence draft (welcome, lesson delivery, completion)
 - Allow rich text editing with markdown support
@@ -23,9 +27,11 @@
 - Save drafts automatically every 30 seconds
 
 ### 3. One-Click Publishing & Payment Setup
+
 **As a creator, I can publish a landing page with Stripe checkout and receive payments so that I can start earning.**
 
 **Acceptance criteria:**
+
 - Generate professional landing page with course description
 - Integrate Stripe payment processing (one-time purchase)
 - Set custom pricing ($10-$500 range)
@@ -33,9 +39,11 @@
 - Email confirmation system for purchases
 
 ### 4. Student Course Access
+
 **As a buyer, I can purchase the course and immediately access the content.**
 
 **Acceptance criteria:**
+
 - Secure course access after payment confirmation
 - Progressive lesson unlocking (one per day or all at once - creator's choice)
 - Mobile-responsive course interface
@@ -43,9 +51,11 @@
 - Course completion tracking and certificate
 
 ### 5. Creator Dashboard
+
 **As a creator, I can track my course performance and student progress so that I can optimize my content.**
 
 **Acceptance criteria:**
+
 - Dashboard showing total sales, revenue, and student count
 - Individual student progress tracking
 - Basic analytics (conversion rate, completion rate)
@@ -102,6 +112,7 @@ The smallest viable feature set that delivers immediate value:
 ## Definition of Done
 
 A user story is complete when:
+
 - All acceptance criteria are met
 - Code passes all tests and linting
 - Feature works end-to-end in staging environment

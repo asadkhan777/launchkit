@@ -2,13 +2,13 @@
 
 ## Role
 
-You are an autonomous **CLI coding agent** continuing work on LaunchKit AI.  In **v6**, you will wrap the backend SDK into an externally consumable **REST API** using Fastify.  The goal is to expose the core operations (health checks, course management, importing and generating content) through clean HTTP endpoints that align with the OpenAPI specification drafted in **v3**.  You will preserve internal logic within the SDK while adding route handlers, validation, and proper error handling at the API boundary.  This version lays the foundation for integrating with the front‑end and future enhancements such as authentication and observability.
+You are an autonomous **CLI coding agent** continuing work on LaunchKit AI. In **v6**, you will wrap the backend SDK into an externally consumable **REST API** using Fastify. The goal is to expose the core operations (health checks, course management, importing and generating content) through clean HTTP endpoints that align with the OpenAPI specification drafted in **v3**. You will preserve internal logic within the SDK while adding route handlers, validation, and proper error handling at the API boundary. This version lays the foundation for integrating with the front‑end and future enhancements such as authentication and observability.
 
 ## Task
 
 1. **Review previous postmortem**
    - Read `instructions_postmortem_v5.md` to ensure a solid understanding of the SDK’s capabilities and any noted caveats.
-   - Confirm that the SDK package builds and tests pass (`pnpm -C packages/sdk run build` and `pnpm -C packages/sdk run test`).  Resolve any residual issues before proceeding.
+   - Confirm that the SDK package builds and tests pass (`pnpm -C packages/sdk run build` and `pnpm -C packages/sdk run test`). Resolve any residual issues before proceeding.
 
 2. **Create the API app**
    - Under `apps/api`, create a new `package.json` with fields:
@@ -52,16 +52,16 @@ You are an autonomous **CLI coding agent** continuing work on LaunchKit AI.  In 
    - Export the Fastify instance for integration testing.
 
 3. **Update OpenAPI specification**
-   - Amend `apps/api/openapi.yaml` to reflect the concrete endpoints added in this version.  Define the `/courses` paths for `GET` and `POST` with request bodies, query parameters, and responses referencing the schemas defined in the components section.
+   - Amend `apps/api/openapi.yaml` to reflect the concrete endpoints added in this version. Define the `/courses` paths for `GET` and `POST` with request bodies, query parameters, and responses referencing the schemas defined in the components section.
    - Ensure the operation IDs and tags are descriptive and consistent.
    - Validate the OpenAPI file using an online or local validator (optional) to ensure syntax correctness.
 
 4. **Tests**
-   - Under `apps/api/test`, write integration tests using **Vitest** (or **supertest**) that spin up the API server on an available port and call the endpoints.  Cover at least:
+   - Under `apps/api/test`, write integration tests using **Vitest** (or **supertest**) that spin up the API server on an available port and call the endpoints. Cover at least:
      - Health endpoint returns status OK.
      - POST `/courses` with valid input creates a course and returns it; subsequent GET `/courses?ownerId=` returns the created course.
      - POST `/courses` with invalid data (e.g. missing title) returns 400.
-   - Use a separate SQLite database for tests, as done in the SDK tests.  Optionally share the test DB setup helper from the SDK package to avoid duplication.
+   - Use a separate SQLite database for tests, as done in the SDK tests. Optionally share the test DB setup helper from the SDK package to avoid duplication.
    - Strive for at least 80% test coverage of the API package.
 
 5. **Run, debug, and commit**

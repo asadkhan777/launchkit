@@ -2,14 +2,14 @@
 
 ## Role
 
-You are an autonomous **CLI coding agent** continuing development of the LaunchKit AI project.  Having laid the data layer foundation and created an OpenAPI skeleton in **v3**, your role in **v4** is to formalise the project tooling and developer experience.  You will initialise a proper monorepo toolchain, enforce linting and formatting standards, and set up continuous integration (CI) to ensure code quality.  This step will create the scaffolding for all future work.
+You are an autonomous **CLI coding agent** continuing development of the LaunchKit AI project. Having laid the data layer foundation and created an OpenAPI skeleton in **v3**, your role in **v4** is to formalise the project tooling and developer experience. You will initialise a proper monorepo toolchain, enforce linting and formatting standards, and set up continuous integration (CI) to ensure code quality. This step will create the scaffolding for all future work.
 
 ## Task
 
 1. **Monorepo tooling**
-   - Install and configure **pnpm** workspaces (or `npm` workspaces if pnpm is unavailable).  The root `package.json` should already define `workspaces: ["apps/*", "packages/*"]`.  Verify this and ensure that running `pnpm install` installs dependencies across all subprojects without duplication.
-   - Introduce **Turborepo** or **Nx** (choose one) to orchestrate scripts across workspaces.  If using Turborepo:
-     - Run `pnpm add -D turbo` and create a `turbo.json` at the repository root defining basic pipelines: `dev`, `build`, `test`, and `lint`.  Example:
+   - Install and configure **pnpm** workspaces (or `npm` workspaces if pnpm is unavailable). The root `package.json` should already define `workspaces: ["apps/*", "packages/*"]`. Verify this and ensure that running `pnpm install` installs dependencies across all subprojects without duplication.
+   - Introduce **Turborepo** or **Nx** (choose one) to orchestrate scripts across workspaces. If using Turborepo:
+     - Run `pnpm add -D turbo` and create a `turbo.json` at the repository root defining basic pipelines: `dev`, `build`, `test`, and `lint`. Example:
        ```json
        {
          "pipeline": {
@@ -22,7 +22,7 @@ You are an autonomous **CLI coding agent** continuing development of the LaunchK
        ```
      - Update `package.json` scripts to run Turbo (e.g. `"dev": "turbo run dev", "build": "turbo run build", "test": "turbo run test", "lint": "turbo run lint"`).
    - Add **Changesets** to manage versioning and releases:
-     - Run `pnpm add -D @changesets/cli` and run `pnpm changeset init` to create `.changeset` directory and configuration.  This will help generate changelogs in future versions.
+     - Run `pnpm add -D @changesets/cli` and run `pnpm changeset init` to create `.changeset` directory and configuration. This will help generate changelogs in future versions.
 
 2. **Linting and formatting**
    - Install **ESLint** and **Prettier** if not already present, along with relevant plugins:
@@ -30,7 +30,7 @@ You are an autonomous **CLI coding agent** continuing development of the LaunchK
    - Ensure `.eslintrc.js` extends `plugin:@typescript-eslint/recommended` and `prettier` to avoid conflicts between ESLint and Prettier.
    - Create a `.eslintignore` file to exclude build outputs (`/dist`, `.next`, `.turbo`) and dependency folders (`/node_modules`, `*.db`).
    - Ensure Prettier is configured via `.prettierrc` and that a Prettier ignore file (`.prettierignore`) excludes build outputs.
-   - Add `prettier` script to `package.json` (e.g. `"format": "prettier --write \"**/*.{js,ts,tsx,md,json}\""`).  Consider adding a pre‑commit hook for formatting in later versions.
+   - Add `prettier` script to `package.json` (e.g. `"format": "prettier --write \"**/*.{js,ts,tsx,md,json}\""`). Consider adding a pre‑commit hook for formatting in later versions.
 
 3. **Commit linting**
    - Add **commitlint** and **husky** to enforce Conventional Commits:
@@ -40,7 +40,8 @@ You are an autonomous **CLI coding agent** continuing development of the LaunchK
    - Document in the README that all commit messages must follow the Conventional Commits standard.
 
 4. **Continuous Integration (CI)**
-   - Create a `.github/workflows/ci.yml` file to run linting, type checking, and tests on every pull request.  Basic example using **GitHub Actions**:
+   - Create a `.github/workflows/ci.yml` file to run linting, type checking, and tests on every pull request. Basic example using **GitHub Actions**:
+
      ```yaml
      name: CI
      on: [push, pull_request]
@@ -58,15 +59,16 @@ You are an autonomous **CLI coding agent** continuing development of the LaunchK
            - run: pnpm run test -- --run
            - run: pnpm run build # placeholder; may be replaced later
      ```
+
    - Commit this workflow file so that CI runs automatically in the next pull request.
 
 5. **TypeScript strictness**
-   - Update `tsconfig.json` to enable strict type checking (`"strict": true`) and no implicit any.  Ensure that all existing TypeScript files compile without type errors.  Fix any issues (e.g. adding explicit types or ignoring config for test files).
+   - Update `tsconfig.json` to enable strict type checking (`"strict": true`) and no implicit any. Ensure that all existing TypeScript files compile without type errors. Fix any issues (e.g. adding explicit types or ignoring config for test files).
 
 6. **Verification and tests**
-   - Install dependencies via `pnpm install` and ensure the new scripts run via Turborepo.  Fix any issues (e.g. misnamed scripts) and commit corrections.
-   - Run `pnpm run lint` and `pnpm run format` (if defined) to ensure code is clean.  Fix issues as needed.
-   - Run the full test suite (`pnpm run test`) and ensure all tests pass.  If any fail, debug and fix.
+   - Install dependencies via `pnpm install` and ensure the new scripts run via Turborepo. Fix any issues (e.g. misnamed scripts) and commit corrections.
+   - Run `pnpm run lint` and `pnpm run format` (if defined) to ensure code is clean. Fix issues as needed.
+   - Run the full test suite (`pnpm run test`) and ensure all tests pass. If any fail, debug and fix.
 
 7. **Postmortem** (`instructions_postmortem_v4.md`)
    - Create `instructions_postmortem_v4.md` summarising:

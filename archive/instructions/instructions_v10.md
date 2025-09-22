@@ -2,12 +2,12 @@
 
 ## Role
 
-As the autonomous **CLI coding agent**, your objective in **v10** is to optimise performance across the LaunchKit AI stack.  You will introduce caching strategies, tune database queries, and configure compression and asset optimisation.  The focus is to achieve good user‑perceived performance while maintaining correctness and cost efficiency.
+As the autonomous **CLI coding agent**, your objective in **v10** is to optimise performance across the LaunchKit AI stack. You will introduce caching strategies, tune database queries, and configure compression and asset optimisation. The focus is to achieve good user‑perceived performance while maintaining correctness and cost efficiency.
 
 ## Task
 
 1. **HTTP caching headers**
-   - For the API, implement caching headers using Fastify’s reply API.  For example, set `Cache-Control: public, max-age=0, s-maxage=60, stale-while-revalidate=60` on responses from endpoints that are safe to cache (e.g. course listings).  Document which endpoints can be cached and for how long.
+   - For the API, implement caching headers using Fastify’s reply API. For example, set `Cache-Control: public, max-age=0, s-maxage=60, stale-while-revalidate=60` on responses from endpoints that are safe to cache (e.g. course listings). Document which endpoints can be cached and for how long.
    - Provide a mechanism to configure cache duration via environment variables for flexibility.
 
 2. **Static asset optimisation**
@@ -17,22 +17,22 @@ As the autonomous **CLI coding agent**, your objective in **v10** is to optimise
      - Configure `next.config.js` to enable `compression` (e.g. using `gzip` or `brotli`) for static assets served by Next.js.
 
 3. **Compression**
-   - In the API, add Fastify’s compression plugin (`@fastify/compress`) and configure it to use Brotli if the client supports it, falling back to gzip.  Test that responses are compressed accordingly.
+   - In the API, add Fastify’s compression plugin (`@fastify/compress`) and configure it to use Brotli if the client supports it, falling back to gzip. Test that responses are compressed accordingly.
 
 4. **Database performance**
-   - Review Prisma queries for potential N+1 issues.  Use `include` statements to fetch related data in a single query when appropriate.
-   - Add indexes to fields that are frequently filtered or sorted on (e.g. `Course.slug`, `Order.courseId`).  This may require updating the Prisma schema and running a migration.
+   - Review Prisma queries for potential N+1 issues. Use `include` statements to fetch related data in a single query when appropriate.
+   - Add indexes to fields that are frequently filtered or sorted on (e.g. `Course.slug`, `Order.courseId`). This may require updating the Prisma schema and running a migration.
    - Document indexing strategy in `docs/07-performance.md` and note any trade‑offs.
 
 5. **Caching layer (optional)**
-   - Introduce a simple caching layer for repeated expensive operations.  If an in‑memory cache suffices, use the `fastify-caching` or `node-cache` modules.  Alternatively, integrate with a serverless Redis provider (e.g. Upstash) but leave actual connection details as environment variables for later configuration.
+   - Introduce a simple caching layer for repeated expensive operations. If an in‑memory cache suffices, use the `fastify-caching` or `node-cache` modules. Alternatively, integrate with a serverless Redis provider (e.g. Upstash) but leave actual connection details as environment variables for later configuration.
    - Wrap expensive functions (e.g. content extraction and generation) with a caching mechanism so repeated calls with the same input return cached results.
 
 6. **Measurement and budgets**
-   - Define performance budgets in `docs/07-performance.md` for key interactions.  For example:
+   - Define performance budgets in `docs/07-performance.md` for key interactions. For example:
      - API endpoints should respond in under 200ms at the 95th percentile under typical load.
      - The home page LCP (Largest Contentful Paint) should be ≤ 2.5s on mobile networks.
-   - Describe how to measure these budgets using tools like Lighthouse CI for the frontend and a load testing tool such as k6 or Artillery for the backend.  Create a simple load test script under `tests/performance.test.ts` that hits the API and measures latency.
+   - Describe how to measure these budgets using tools like Lighthouse CI for the frontend and a load testing tool such as k6 or Artillery for the backend. Create a simple load test script under `tests/performance.test.ts` that hits the API and measures latency.
 
 7. **Testing**
    - Write tests to verify that caching headers are present on cached responses and absent on uncached responses.

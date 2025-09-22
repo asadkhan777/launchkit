@@ -72,7 +72,8 @@ In **v8**, your role as the autonomous **CLI coding agent** is to elevate the **
     - Report on test coverage improvements and quality metrics
     - Identify any remaining testing debt or areas for improvement
     - Provide recommendations for frontend testing strategy (V16)
-   - Commit the postmortem and changes with a message such as `test(v8): add comprehensive testing pyramid`.
+
+- Commit the postmortem and changes with a message such as `test(v8): add comprehensive testing pyramid`.
 
 ## Format
 

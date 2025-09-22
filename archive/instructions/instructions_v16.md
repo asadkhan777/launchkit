@@ -7,6 +7,7 @@ In **V16**, your role as the autonomous **CLI coding agent** is to implement com
 ## Context
 
 By V16, the LaunchKit AI platform should have:
+
 - Complete frontend application with authentication (V11-V15)
 - Design system with Storybook documentation (V11)
 - API-frontend integration with real user flows (V13-V14)

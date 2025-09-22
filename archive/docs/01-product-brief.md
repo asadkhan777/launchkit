@@ -7,6 +7,7 @@ Solo creators have valuable content—blog posts, tutorials, expertise—but lac
 ## Who
 
 **Primary users:**
+
 - **Solo creators** with existing content libraries or expertise
 - **Indie SaaS founders** looking to create educational products around their domain knowledge
 - **Consultants and coaches** who want to scale their knowledge through digital products
@@ -36,6 +37,7 @@ Three converging trends make this the perfect time:
 **Automatic "content → course → funnel" generation with minimal setup.**
 
 LaunchKit AI uniquely bridges the gap between raw content and sellable product by:
+
 - **One-click transformation** - Paste content (Notion, docs, URLs) and get a structured course
 - **Intelligent packaging** - AI analyzes content and creates logical lesson progression
 - **Complete funnel generation** - Landing page, checkout, and email sequences created automatically
@@ -44,11 +46,13 @@ LaunchKit AI uniquely bridges the gap between raw content and sellable product b
 ## Success Metrics (KPI)
 
 **Primary KPI: Activation-to-First-Revenue rate (A2R)**
+
 - Percentage of new users who make at least one sale within 14 days
 - Target: 25% A2R rate
 - This metric captures both product usability and market demand validation
 
 **Supporting metrics:**
+
 - Time from signup to first course published (target: <2 hours)
 - Course completion rate by students (target: >60%)
 - Creator retention at 30 days (target: >40%)
@@ -58,15 +62,15 @@ LaunchKit AI uniquely bridges the gap between raw content and sellable product b
 **Key risks:**
 
 1. **AI quality issues** - Generated courses lack coherence or value
-   - *Mitigation:* Multi-stage quality checks, human review workflows, content scoring algorithms
+   - _Mitigation:_ Multi-stage quality checks, human review workflows, content scoring algorithms
 
 2. **Third-party API failures** - Stripe, email providers, or AI services go down
-   - *Mitigation:* Retry mechanisms, webhook queues, graceful degradation, multiple provider support
+   - _Mitigation:_ Retry mechanisms, webhook queues, graceful degradation, multiple provider support
 
 3. **Platform dependency** - Over-reliance on specific AI models or services
-   - *Mitigation:* Extensible architecture supporting multiple AI providers, local processing options
+   - _Mitigation:_ Extensible architecture supporting multiple AI providers, local processing options
 
 4. **Market saturation** - Large platforms replicate core functionality
-   - *Mitigation:* Focus on creator experience and rapid iteration, build network effects through creator community
+   - _Mitigation:_ Focus on creator experience and rapid iteration, build network effects through creator community
 
 **Success depends on:** Delivering genuinely useful auto-generated content and maintaining a frictionless user experience that competitors can't easily replicate.

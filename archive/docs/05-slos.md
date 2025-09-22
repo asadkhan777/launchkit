@@ -17,6 +17,7 @@ This document defines the Service Level Objectives (SLOs) for the LaunchKit.ai A
 - **Failure Criteria**: HTTP status codes 500-599 and timeouts
 
 **Error Budget Burn Rate Alerting**:
+
 - **Fast Burn**: Alert if error budget will be exhausted in < 2 hours (1% error rate over 5 minutes)
 - **Slow Burn**: Alert if error budget will be exhausted in < 6 days (0.1% error rate over 1 hour)
 
@@ -31,6 +32,7 @@ This document defines the Service Level Objectives (SLOs) for the LaunchKit.ai A
 - **Exclusions**: Health check endpoints (`/healthz`, `/livez`, `/readyz`)
 
 **Error Budget Burn Rate Alerting**:
+
 - **Fast Burn**: Alert if > 10% of requests exceed 200ms over 5 minutes
 - **Slow Burn**: Alert if > 5% of requests exceed 200ms over 1 hour
 
@@ -58,6 +60,7 @@ All SLO metrics are collected via:
 ### SLI (Service Level Indicator) Queries
 
 #### Availability SLI
+
 ```promql
 # Success rate over 30 days
 (
@@ -67,6 +70,7 @@ All SLO metrics are collected via:
 ```
 
 #### Latency SLI
+
 ```promql
 # P95 latency for courses endpoints
 histogram_quantile(0.95,
@@ -79,12 +83,14 @@ histogram_quantile(0.95,
 ### Error Budget Tracking
 
 Error budgets are calculated as:
+
 ```
 Error Budget Remaining = SLO Target - Current Performance
 Error Budget Burn Rate = (Errors in Period) / (Total Error Budget)
 ```
 
 #### Availability Error Budget
+
 ```promql
 # Remaining error budget (%)
 max(0, 99.9 - (
@@ -94,6 +100,7 @@ max(0, 99.9 - (
 ```
 
 #### Latency Error Budget
+
 ```promql
 # Percentage of requests exceeding 200ms
 (
@@ -130,16 +137,19 @@ max(0, 99.9 - (
 ## SLO Review Process
 
 ### Weekly Reviews
+
 - Check error budget consumption
 - Review alert frequency and accuracy
 - Identify trends and patterns in SLI data
 
 ### Monthly Reviews
+
 - Assess SLO target appropriateness
 - Review error budget allocation
 - Plan improvements based on user feedback
 
 ### Quarterly Reviews
+
 - Consider new SLOs for additional services
 - Update targets based on business requirements
 - Review monitoring and alerting effectiveness
@@ -147,16 +157,19 @@ max(0, 99.9 - (
 ## Implementation Roadmap
 
 ### Phase 1: Basic Monitoring (Current)
+
 - ✅ OpenTelemetry instrumentation
 - ✅ Health check endpoints
 - ✅ Basic error tracking with Sentry
 
 ### Phase 2: SLO Dashboard (Next)
+
 - [ ] Grafana dashboard for SLI visualization
 - [ ] Error budget tracking charts
 - [ ] Alert rule configuration
 
 ### Phase 3: Advanced SLOs (Future)
+
 - [ ] User-facing latency SLOs (browser performance)
 - [ ] Data freshness SLOs (course content updates)
 - [ ] Feature-specific availability (course generation, payments)

@@ -2,7 +2,7 @@
 
 ## Role
 
-As the autonomous **CLI coding agent** for LaunchKit AI, your mission in **v11** is to establish a unified **design system and UI foundation**.  You will install a component library based on **Radix UI** and **shadcn/ui**, configure Tailwind for utility classes, define design tokens (colors, spacing, radius), and set up Storybook for documentation and visual testing.  This design system will provide accessible, consistent components for the entire application.
+As the autonomous **CLI coding agent** for LaunchKit AI, your mission in **v11** is to establish a unified **design system and UI foundation**. You will install a component library based on **Radix UI** and **shadcn/ui**, configure Tailwind for utility classes, define design tokens (colors, spacing, radius), and set up Storybook for documentation and visual testing. This design system will provide accessible, consistent components for the entire application.
 
 ## Task
 
@@ -50,10 +50,7 @@ As the autonomous **CLI coding agent** for LaunchKit AI, your mission in **v11**
    - At the repository root (or within `packages/ui`), create a `tailwind.config.js` file that defines your design tokens:
      ```js
      module.exports = {
-       content: [
-         './packages/ui/src/**/*.{ts,tsx}',
-         './apps/web/**/*.{ts,tsx}',
-       ],
+       content: ['./packages/ui/src/**/*.{ts,tsx}', './apps/web/**/*.{ts,tsx}'],
        theme: {
          extend: {
            colors: {
@@ -75,7 +72,7 @@ As the autonomous **CLI coding agent** for LaunchKit AI, your mission in **v11**
    - Create a PostCSS configuration (`postcss.config.js`) that loads `tailwindcss` and `autoprefixer`.
 
 3. **Define base components**
-   - Under `packages/ui/src/components`, create 5–10 foundational components wrapping Radix primitives and styled with Tailwind.  At minimum, implement:
+   - Under `packages/ui/src/components`, create 5–10 foundational components wrapping Radix primitives and styled with Tailwind. At minimum, implement:
      - `Button.tsx`: wrap `@radix-ui/react-button` and apply Tailwind classes for primary and secondary variants.
      - `Input.tsx`: create a styled input component with label support.
      - `Modal.tsx`: wrap `@radix-ui/react-dialog` to create a modal dialog.
@@ -85,13 +82,13 @@ As the autonomous **CLI coding agent** for LaunchKit AI, your mission in **v11**
 
 4. **Storybook setup**
    - Inside `packages/ui`, run `npx sb init` to scaffold a Storybook configuration.
-   - Configure Storybook to use **React** and **Vite** (if available) to support Tailwind.  Add the `@storybook/addon-a11y` and `@storybook/addon-essentials` to the addons list in `.storybook/main.js`.
-   - Create stories for each base component in `packages/ui/src/components/__stories__`.  Each story should demonstrate different states (e.g. primary/secondary button, disabled input) and include accessibility annotations if necessary.
-   - Run `pnpm -C packages/ui run storybook` to verify that stories render correctly.  Fix any issues with Tailwind or component setup.
+   - Configure Storybook to use **React** and **Vite** (if available) to support Tailwind. Add the `@storybook/addon-a11y` and `@storybook/addon-essentials` to the addons list in `.storybook/main.js`.
+   - Create stories for each base component in `packages/ui/src/components/__stories__`. Each story should demonstrate different states (e.g. primary/secondary button, disabled input) and include accessibility annotations if necessary.
+   - Run `pnpm -C packages/ui run storybook` to verify that stories render correctly. Fix any issues with Tailwind or component setup.
 
 5. **Testing and accessibility**
-   - Write unit tests for each component in `packages/ui/test`, using **@testing-library/react** and **Vitest**.  For example, test that the `Button` renders text and calls the `onClick` handler.
-   - Use the Storybook **a11y addon** and `jest-axe` in component tests to validate accessibility.  Ensure that components have proper ARIA attributes and keyboard interactions.
+   - Write unit tests for each component in `packages/ui/test`, using **@testing-library/react** and **Vitest**. For example, test that the `Button` renders text and calls the `onClick` handler.
+   - Use the Storybook **a11y addon** and `jest-axe` in component tests to validate accessibility. Ensure that components have proper ARIA attributes and keyboard interactions.
 
 6. **Publish and verify**
    - Build the UI package (`pnpm -C packages/ui run build`) and verify no TypeScript errors.

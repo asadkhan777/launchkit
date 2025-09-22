@@ -2,12 +2,12 @@
 
 ## Role
 
-You are an autonomous **CLI coding agent** working within the **LaunchKit AI** project.  Your goal in this version is to set up the initial product documentation that will steer development.  You will operate directly inside the repository, creating files and committing changes.
+You are an autonomous **CLI coding agent** working within the **LaunchKit AI** project. Your goal in this version is to set up the initial product documentation that will steer development. You will operate directly inside the repository, creating files and committing changes.
 
 ## Task
 
 1. **Create documentation directory**
-   - At the root of the repository, ensure there is a directory named `docs`.  If it does not exist, create it.
+   - At the root of the repository, ensure there is a directory named `docs`. If it does not exist, create it.
 
 2. **Product framing** (`docs/01-product-brief.md`)
    - Inside `docs`, create a file named `01-product-brief.md`.
@@ -23,13 +23,13 @@ You are an autonomous **CLI coding agent** working within the **LaunchKit AI** p
 
 3. **User stories & scope** (`docs/02-user-stories.md`)
    - Inside `docs`, create a file named `02-user-stories.md`.
-   - Outline a series of **must‑ship user stories** that describe the minimum viable product (MVP).  Each story should be written from the perspective of a user and include acceptance criteria.  Examples:
-     1. *As a solo creator, I can paste a Notion URL or text and see a course outline generated so that I can decide whether to proceed.*
-     2. *As a creator, I can review and edit the auto‑generated lessons and emails before publishing, so that the course reflects my voice.*
-     3. *As a creator, I can publish a landing page with a Stripe checkout and receive payments so that I can start earning.*
-     4. *As a buyer, I can purchase the course and immediately access the content.*
+   - Outline a series of **must‑ship user stories** that describe the minimum viable product (MVP). Each story should be written from the perspective of a user and include acceptance criteria. Examples:
+     1. _As a solo creator, I can paste a Notion URL or text and see a course outline generated so that I can decide whether to proceed._
+     2. _As a creator, I can review and edit the auto‑generated lessons and emails before publishing, so that the course reflects my voice._
+     3. _As a creator, I can publish a landing page with a Stripe checkout and receive payments so that I can start earning._
+     4. _As a buyer, I can purchase the course and immediately access the content._
    - Clearly state any **non‑goals** or features deferred to later versions (e.g. advanced analytics, custom domains, referral programs).
-   - Define the **“day‑1 scope”**—the absolute minimum feature set required to deliver value quickly.  Keep this list short.
+   - Define the **“day‑1 scope”**—the absolute minimum feature set required to deliver value quickly. Keep this list short.
 
 4. **Commit your work**
    - Save both documents and stage them with Git.
@@ -37,7 +37,7 @@ You are an autonomous **CLI coding agent** working within the **LaunchKit AI** p
 
 5. **Postmortem** (`instructions_postmortem_v0.md`)
    - After committing, create a file at the repository root named `instructions_postmortem_v0.md`.
-   - Summarise what you accomplished in this version.  Include:
+   - Summarise what you accomplished in this version. Include:
      - A brief overview of the files created and their purpose.
      - How these documents should guide future development.
      - Any open questions or assumptions that need clarification in later phases.

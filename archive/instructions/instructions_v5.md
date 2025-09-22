@@ -2,14 +2,14 @@
 
 ## Role
 
-You are an autonomous **CLI coding agent** working on the LaunchKit AI project.  In **v5** your role is to build a minimal yet functional **backend SDK** to interact with the database via Prisma and expose reusable functions that map to the endpoints defined in the OpenAPI skeleton.  You will use **Fastify** for an internal server (not yet exposed to external clients) and **Zod** for runtime validation.  Your objective is to achieve high test coverage through unit and integration tests, ensuring that the SDK is reliable before wrapping it in a REST API in the next phase.
+You are an autonomous **CLI coding agent** working on the LaunchKit AI project. In **v5** your role is to build a minimal yet functional **backend SDK** to interact with the database via Prisma and expose reusable functions that map to the endpoints defined in the OpenAPI skeleton. You will use **Fastify** for an internal server (not yet exposed to external clients) and **Zod** for runtime validation. Your objective is to achieve high test coverage through unit and integration tests, ensuring that the SDK is reliable before wrapping it in a REST API in the next phase.
 
 ## Task
 
 1. **Review earlier work**
    - Revisit `instructions_postmortem_v4.md` to understand the current monorepo tooling and how it supports running multiple packages.
    - Ensure that the `packages` directory contains `sdk` and `common`; if not, create them.
-   - Confirm that Prisma client generation from **v3** is available via `prisma generate`.  If not, run it now.
+   - Confirm that Prisma client generation from **v3** is available via `prisma generate`. If not, run it now.
 
 2. **Set up the SDK package**
    - Inside `packages`, create a new folder `sdk` with its own `package.json`:
@@ -50,7 +50,7 @@ You are an autonomous **CLI coding agent** working on the LaunchKit AI project. 
    - Make sure to export this start function for tests to consume.
 
 4. **Implement core SDK functions**
-   - In `packages/sdk/src/courses.ts`, implement functions to create and fetch courses using Prisma.  For example:
+   - In `packages/sdk/src/courses.ts`, implement functions to create and fetch courses using Prisma. For example:
      - `createCourse(input: { ownerId: string; title: string; description: string; lessons: { title: string; content: string; order?: number }[] }): Promise<Course>`: create a course and associated lessons.
      - `listCourses(ownerId: string): Promise<Course[]>`: return all courses for a given user.
    - Validate inputs using **Zod** schemas defined in the same file or separate `schemas.ts`.
@@ -61,15 +61,15 @@ You are an autonomous **CLI coding agent** working on the LaunchKit AI project. 
      - Health check returns status OK.
      - `createCourse` validates inputs (e.g. rejects missing title) and persists data.
      - `listCourses` returns courses only for the specified user.
-   - Use an in‑memory SQLite database for tests by configuring `DATABASE_URL="file:./dev-test.db"` before running Prisma migrations.  You may create a `test/setup.ts` file that runs migrations and seeds the test DB before tests run.
+   - Use an in‑memory SQLite database for tests by configuring `DATABASE_URL="file:./dev-test.db"` before running Prisma migrations. You may create a `test/setup.ts` file that runs migrations and seeds the test DB before tests run.
    - Aim for 100% coverage of the new SDK functions.
 
 6. **Generate SDK types (optional)**
-   - If you have defined your OpenAPI specification with versioned endpoints, you can optionally generate a typed client for the SDK using a tool like `openapi-typescript-codegen`.  For now, stub this as a TODO in the package README.
+   - If you have defined your OpenAPI specification with versioned endpoints, you can optionally generate a typed client for the SDK using a tool like `openapi-typescript-codegen`. For now, stub this as a TODO in the package README.
 
 7. **Run tests and fix bugs**
    - Execute the build script (`pnpm -C packages/sdk run build`) to ensure TypeScript compiles without errors.
-   - Run `pnpm -C packages/sdk run test`.  Fix any failing tests until all pass.
+   - Run `pnpm -C packages/sdk run test`. Fix any failing tests until all pass.
    - Run the linter (`pnpm -C packages/sdk run lint`) and fix any issues.
    - Commit your code frequently with messages describing each logical change (e.g. `feat(sdk): add Fastify health endpoint`, `feat(sdk): implement createCourse`).
 
