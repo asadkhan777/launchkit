@@ -18,8 +18,8 @@
     "zod": "latest"
   },
   "devDependencies": {
-    "@types/node": "^20.14.9",
-    "typescript": "^5.5.4",
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   }
 }
