@@ -12,7 +12,8 @@
       "@/*": ["./src/*"],
       "@test/*": ["./test/*"],
       "@/lib/*": ["../../lib/*"],
-      "@/lib": ["../../lib"]
+      "@/lib": ["../../lib"],
+      "@launchkit-ai/lib": ["../../packages/lib/src/index.ts"]
     }
   },
   "include": ["src/**/*"],

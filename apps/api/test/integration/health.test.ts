@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { FastifyInstance } from 'fastify';
-import { createApp } from '@/index.js';
+import { createApp } from '../../src/index';
 
 describe('Health Checks', () => {
   let app: FastifyInstance;
